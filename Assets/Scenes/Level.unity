@@ -86,6 +86,7 @@ GameObject:
   - 92: {fileID: 1013138150}
   - 124: {fileID: 1013138149}
   - 81: {fileID: 1013138148}
+  - 114: {fileID: 1013138153}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -123,7 +124,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -134,7 +135,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -158,3 +159,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1013138153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1013138147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ad30963044ad54ea0236c2f640a001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapName: Level1
+  floorPrefab: {fileID: 100000, guid: 9418a4300df080840bd3e08211e48c88, type: 2}
+  goldPrefab: {fileID: 100000, guid: 7e9c8fd5b69da10429a82a3553c68ab2, type: 2}
+  hardFloorPrefab: {fileID: 100000, guid: 9067c47f8e9bd7d4d9d5f9251dfc901e, type: 2}
+  ladderPrefab: {fileID: 100000, guid: ac32121df3a3d7e4192eaa9e7a6346cb, type: 2}
+  stickPrefab: {fileID: 100000, guid: 46ecabc4d2144974497b79483c92eba4, type: 2}
