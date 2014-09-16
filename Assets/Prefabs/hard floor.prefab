@@ -12,7 +12,7 @@ GameObject:
   - 61: {fileID: 6100000}
   m_Layer: 0
   m_Name: hard floor
-  m_TagString: Untagged
+  m_TagString: HardFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .226405203, y: -.922707915, z: 0}
+  m_LocalPosition: {x: 7.59293032, y: -1.41954672, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -37,9 +37,9 @@ BoxCollider2D:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
+  m_IsTrigger: 0
+  m_Size: {x: .319999993, y: .319999993}
+  m_Center: {x: 0, y: .159999996}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
