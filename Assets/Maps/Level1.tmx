@@ -15,6 +15,12 @@
  <tileset firstgid="5" name="stick" tilewidth="32" tileheight="32">
   <image source="../Sprites/stick.jpg" width="32" height="32"/>
  </tileset>
+ <tileset firstgid="6" name="runner" tilewidth="32" tileheight="32">
+  <image source="../Sprites/runner.jpg" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="7" name="chaser" tilewidth="32" tileheight="32">
+  <image source="../Sprites/chaser.jpg" width="32" height="32"/>
+ </tileset>
  <layer name="块层 1" width="40" height="15">
   <data>
    <tile gid="4"/>
@@ -504,6 +510,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="7"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -518,8 +525,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="6"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>

@@ -135,7 +135,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -154,7 +154,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1013138147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 6, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -176,3 +176,5 @@ MonoBehaviour:
   hardFloorPrefab: {fileID: 100000, guid: 9067c47f8e9bd7d4d9d5f9251dfc901e, type: 2}
   ladderPrefab: {fileID: 100000, guid: ac32121df3a3d7e4192eaa9e7a6346cb, type: 2}
   stickPrefab: {fileID: 100000, guid: 46ecabc4d2144974497b79483c92eba4, type: 2}
+  runnerPrefab: {fileID: 100000, guid: ae49127850af3ce4eb79f9608d8a1d41, type: 2}
+  chaserPrefab: {fileID: 100000, guid: 9abebc64b319b4b45be12b79f412d73a, type: 2}

@@ -10,6 +10,8 @@ public class GenerateMap : MonoBehaviour {
 	public GameObject hardFloorPrefab;
 	public GameObject ladderPrefab;
 	public GameObject stickPrefab;
+	public GameObject runnerPrefab;
+	public GameObject chaserPrefab;
 
 	private Dictionary<string, GameObject> tilePrefabDictionary;
 	// Use this for initialization
@@ -20,6 +22,8 @@ public class GenerateMap : MonoBehaviour {
 		tilePrefabDictionary ["hard floor"] = hardFloorPrefab;
 		tilePrefabDictionary ["ladder"] = ladderPrefab;
 		tilePrefabDictionary ["stick"] = stickPrefab;
+		tilePrefabDictionary ["runner"] = runnerPrefab;
+		tilePrefabDictionary ["chaser"] = chaserPrefab;
 		loadMap ();
 	}
 	
@@ -51,7 +55,6 @@ public class GenerateMap : MonoBehaviour {
 					Instantiate(tilePrefabDictionary[tileName],
 					            new Vector3(x * 0.32f, y * 0.32f, 0f),
 					            Quaternion.identity);
-					Debug.Log ("tile " + tileName + " at " + x + " " + y );
 				}
 			}
 		}
