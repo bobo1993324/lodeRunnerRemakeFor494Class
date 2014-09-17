@@ -53,7 +53,7 @@ public class GenerateMap : MonoBehaviour {
 				if (gid != "0") {
 					string tileName = tileMap[tilesList[i].Attributes["gid"].Value];
 					Instantiate(tilePrefabDictionary[tileName],
-					            new Vector3(x * 0.32f, y * 0.32f, 0f),
+					            new Vector3(x, y, 0f),
 					            Quaternion.identity);
 				}
 			}

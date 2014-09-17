@@ -2,12 +2,17 @@
 using System.Collections;
 
 public class Runner : MonoBehaviour {
-	public float runSpeed;
-	public float climbSpeed;
+	public float runSpeed = 4;
+	public float climbSpeed = 4;
+	public float fallspeed = 4;
 
 	public int wallOnRightCount = 0;
 	public int wallOnLeftCount = 0;
 	public int onFloorCount = 0;
+	public int onLadderCenterCount = 0;
+	public int onLadderDownCount = 0;
+	public int onLadderCount = 0;
+	public int onStickCount = 0;
 
 	bool hasWallOnRight() {
 		return wallOnRightCount > 0;
@@ -18,10 +23,9 @@ public class Runner : MonoBehaviour {
 	bool onFloor() {
 		return onFloorCount > 0; 
 	}
-
-	public bool onLadder = false;
-	public bool onLadderTop = false;
-
+	bool onStick() {
+		return onStickCount > 0;
+	}
 	// Use this for initialization
 	void Start () {
 
@@ -29,6 +33,20 @@ public class Runner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (onStick()) {
+			Vector3 previousPosition = transform.position;
+			previousPosition.y = Mathf.Round(previousPosition.y);
+			transform.position = previousPosition;
+		}
+
+		if (onFloorCount + onLadderCount + onLadderDownCount == 0 
+		    	&& !onStick()) {
+			//falling
+			Vector3 previousPosition = transform.position;
+			previousPosition.y -= fallspeed * Time.deltaTime;
+			transform.position = previousPosition;
+			return;
+		}
 		float horizontalMoveDistance = Input.GetAxisRaw ("Horizontal") * runSpeed * Time.deltaTime;
 		bool stopByWall = (hasWallOnLeft() && horizontalMoveDistance < 0) 
 						|| (hasWallOnRight() && horizontalMoveDistance > 0); 
@@ -37,47 +55,18 @@ public class Runner : MonoBehaviour {
 			previousPosition.x += horizontalMoveDistance;
 			transform.position = previousPosition;
 		}
+
 		float verticalMoveDistance = Input.GetAxisRaw ("Vertical") * climbSpeed * Time.deltaTime;
-		bool noMoreLadderUp = onLadderTop && verticalMoveDistance > 0;
-		bool onFloorDown = onFloor() && verticalMoveDistance < 0;
-		if (onLadder && !noMoreLadderUp && !onFloorDown) {
+		if ((verticalMoveDistance < 0 && onLadderDownCount > 0 && !onFloor())
+		    	|| (verticalMoveDistance > 0 && onLadderCenterCount > 0)) {
 			Vector3 previousPosition = transform.position;
+			previousPosition.x = Mathf.Round(previousPosition.x);
 			previousPosition.y += verticalMoveDistance;
 			transform.position = previousPosition;
-		}
-	}
-
-	void OnTriggerEnter2D(Collider2D coll) {
-		GameObject gameObject = coll.gameObject;
-	}
-
-	void OnTriggerStay2D(Collider2D coll) {
-		GameObject gameObject = coll.gameObject;
-		if (gameObject.tag == "Ladder") {
-			onLadder = true;
-			Ladder ladder = gameObject.GetComponent<Ladder>();
-			if (ladder.isTopLadder) {
-				if (transform.position.y - 0.32f < gameObject.transform.position.y)
-					onLadderTop = false;
-				else
-					onLadderTop = true;
-			}
-		}
-	}
-
-	void OnTriggerExit2D(Collider2D coll) {
-		GameObject gameObject = coll.gameObject;
-		if (gameObject.tag == "Ladder") {
-			onLadder = false;
-			Ladder ladder = gameObject.GetComponent<Ladder>();
-			if (ladder.isTopLadder 
-			    && transform.position.y > gameObject.transform.position.y
-			    && Mathf.Abs(transform.position.x - gameObject.transform.position.x) < 0.32f) {
-				onLadderTop = true;
-				Vector3 pos = transform.position;
-				pos.y = gameObject.transform.position.y + 0.32f;
-				transform.position = pos;
-			}
+		} else if (verticalMoveDistance < 0 && onStick() && !onFloor()) {
+			Vector3 previousPosition = transform.position;
+			previousPosition.y -= 0.3f;
+			transform.position = previousPosition;
 		}
 	}
 }

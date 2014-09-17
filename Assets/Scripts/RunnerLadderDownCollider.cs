@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RunnerLeftWallCollider : MonoBehaviour {
+public class RunnerLadderDownCollider : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -15,15 +15,15 @@ public class RunnerLeftWallCollider : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D coll) {
 		Runner run = gameObject.GetComponentInParent<Runner>();
-		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor") {
-			run.wallOnLeftCount ++;
+		if (coll.gameObject.tag == "Ladder") {
+			run.onLadderDownCount ++;
 		}
 	}
-    
+	
 	void OnTriggerExit2D(Collider2D coll) {
 		Runner run = gameObject.GetComponentInParent<Runner>();
-        if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor") {
-			run.wallOnLeftCount --;
+		if (coll.gameObject.tag == "Ladder") {
+			run.onLadderDownCount --;
 		}
 	}
 }
