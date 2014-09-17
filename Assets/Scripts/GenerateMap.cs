@@ -12,6 +12,7 @@ public class GenerateMap : MonoBehaviour {
 	public GameObject stickPrefab;
 	public GameObject runnerPrefab;
 	public GameObject chaserPrefab;
+	public GameObject hiddenLadderPrefab;
 
 	private Dictionary<string, GameObject> tilePrefabDictionary;
 	// Use this for initialization
@@ -24,6 +25,7 @@ public class GenerateMap : MonoBehaviour {
 		tilePrefabDictionary ["stick"] = stickPrefab;
 		tilePrefabDictionary ["runner"] = runnerPrefab;
 		tilePrefabDictionary ["chaser"] = chaserPrefab;
+		tilePrefabDictionary ["hiddenLadder"] = hiddenLadderPrefab;
 		loadMap ();
 	}
 	

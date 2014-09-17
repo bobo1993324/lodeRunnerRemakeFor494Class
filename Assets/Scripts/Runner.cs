@@ -33,10 +33,11 @@ public class Runner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (onStick()) {
-			Vector3 previousPosition = transform.position;
-			previousPosition.y = Mathf.Round(previousPosition.y);
-			transform.position = previousPosition;
+		if (onStick() || onFloor()) {
+			adjustVerticalPosition();
+		}
+		if (hasWallOnLeft () || hasWallOnRight ()) {
+			adjustHorizontalPosition();
 		}
 
 		if (onFloorCount + onLadderCount + onLadderDownCount == 0 
@@ -68,5 +69,17 @@ public class Runner : MonoBehaviour {
 			previousPosition.y -= 0.3f;
 			transform.position = previousPosition;
 		}
+	}
+
+	void adjustHorizontalPosition() {
+		Vector3 previousPosition = transform.position;
+		previousPosition.x = Mathf.Round(previousPosition.x);
+		transform.position = previousPosition;
+	}
+
+	void adjustVerticalPosition() {
+		Vector3 previousPosition = transform.position;
+		previousPosition.y = Mathf.Round(previousPosition.y);
+		transform.position = previousPosition;
 	}
 }
