@@ -16,7 +16,7 @@
   <image source="../Sprites/stick.jpg" width="32" height="32"/>
  </tileset>
  <tileset firstgid="6" name="runner" tilewidth="32" tileheight="32">
-  <image source="../Sprites/runner.jpg" width="32" height="32"/>
+  <image source="../Sprites/runner.png" width="32" height="32"/>
  </tileset>
  <tileset firstgid="7" name="chaser" tilewidth="32" tileheight="32">
   <image source="../Sprites/chaser.jpg" width="32" height="32"/>
