@@ -13,8 +13,34 @@ public class GenerateMap : MonoBehaviour {
 	public GameObject runnerPrefab;
 	public GameObject chaserPrefab;
 	public GameObject hiddenLadderPrefab;
-
+	
 	private Dictionary<string, GameObject> tilePrefabDictionary;
+
+	private GameObject[,] gameObjectMatrix;
+	public int width;
+	public int height;
+	public GameObject getObjectAt(int x, int y) {
+		return gameObjectMatrix [x, y];
+	}
+	public GameObject getPlayer() {
+		for (int i = 0; i < gameObjectMatrix.GetLength(0); i++) {
+			for (int j = 0; j < gameObjectMatrix.GetLength(1); j++) {
+				if (gameObjectMatrix[i, j] != null && gameObjectMatrix[i, j].tag == "Player") {
+					return gameObjectMatrix[i, j];
+				}
+			}
+		}
+		return null;
+	}
+	public List<GameObject> getLaddersAtHeight(int y) {
+		List<GameObject> result = new List<GameObject>();
+		for(int i = 0; i < gameObjectMatrix.GetLength(0); i++) {
+			if (gameObjectMatrix[i, y] != null && gameObjectMatrix[i, y].tag == "Ladder") {
+				result.Add(gameObjectMatrix[i, y]);
+			}
+		}
+		return result;
+	}
 	// Use this for initialization
 	void Start () {
 		tilePrefabDictionary = new Dictionary<string, GameObject> ();
@@ -28,11 +54,6 @@ public class GenerateMap : MonoBehaviour {
 		tilePrefabDictionary ["hiddenLadder"] = hiddenLadderPrefab;
 		loadMap ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
 
 	private void loadMap() {
 		XmlDocument xmlDoc = new XmlDocument ();
@@ -45,8 +66,9 @@ public class GenerateMap : MonoBehaviour {
 		}
 		XmlNodeList layerList = xmlDoc.GetElementsByTagName("layer");
 		foreach (XmlNode layer in layerList) {
-			int width = int.Parse(layer.Attributes["width"].Value);
-			int height = int.Parse(layer.Attributes["height"].Value);
+			width = int.Parse(layer.Attributes["width"].Value);
+			height = int.Parse(layer.Attributes["height"].Value);
+			gameObjectMatrix = new GameObject[width, height];
 			XmlNodeList tilesList = layer.ChildNodes[0].ChildNodes;
 			for (int i = 0; i < tilesList.Count; i++) {
 				int x = i % width;
@@ -54,9 +76,10 @@ public class GenerateMap : MonoBehaviour {
 				string gid = tilesList[i].Attributes["gid"].Value;
 				if (gid != "0") {
 					string tileName = tileMap[tilesList[i].Attributes["gid"].Value];
-					Instantiate(tilePrefabDictionary[tileName],
-					            new Vector3(x, y, 0f),
-					            Quaternion.identity);
+					gameObjectMatrix[x, y] = 
+						Instantiate(tilePrefabDictionary[tileName],
+					            new Vector2(x, y),
+					            Quaternion.identity) as GameObject;
 				}
 			}
 		}

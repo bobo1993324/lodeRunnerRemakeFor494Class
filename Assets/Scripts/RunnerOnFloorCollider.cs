@@ -2,28 +2,19 @@
 using System.Collections;
 
 public class RunnerOnFloorCollider : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
+	People people;
+	void Start() {
+		people = gameObject.GetComponentInParent<People> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	void OnTriggerEnter2D(Collider2D coll) {
-		Runner run = gameObject.GetComponentInParent<Runner>();
 		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor") {
-			run.onFloorCount ++;
+			people.onFloorCount ++;
 		}
 	}
 	
 	void OnTriggerExit2D(Collider2D coll) {
-		Runner run = gameObject.GetComponentInParent<Runner>();
 		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor") {
-			run.onFloorCount --;
+			people.onFloorCount --;
 		}
 	}
 }

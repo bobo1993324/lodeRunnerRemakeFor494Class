@@ -2,17 +2,19 @@
 using System.Collections;
 
 public class RunnerStickCollider : MonoBehaviour {
+	People people;
+	void Start() {
+		people = gameObject.GetComponentInParent<People> ();
+	}
 	void OnTriggerEnter2D(Collider2D coll) {
-		Runner run = gameObject.GetComponentInParent<Runner>();
 		if (coll.gameObject.tag == "Stick") {
-			run.onStickCount ++;
+			people.onStickCount ++;
 		}
 	}
 	
 	void OnTriggerExit2D(Collider2D coll) {
-		Runner run = gameObject.GetComponentInParent<Runner>();
 		if (coll.gameObject.tag == "Stick") {
-			run.onStickCount --;
+			people.onStickCount --;
 		}
 	}
 }

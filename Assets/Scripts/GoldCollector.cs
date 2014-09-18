@@ -19,7 +19,7 @@ public class GoldCollector : MonoBehaviour {
 		if (collectedGold == totalGold) {
 			GameObject[] hiddenLadders = GameObject.FindGameObjectsWithTag("HiddenLadder");
 			foreach (GameObject hiddenLadder in hiddenLadders) {
-				hiddenLadder.renderer.enabled = true;
+				hiddenLadder.GetComponent<HiddenLadder>().show();
 			}
 			Debug.Log("Hide");
 		}
