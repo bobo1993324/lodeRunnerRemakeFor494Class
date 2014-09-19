@@ -4,9 +4,16 @@ using System.Collections.Generic;
 
 public class Chaser : People {
 	private GameObject player;
-	private GenerateMap map;
-	void Start() {
-		map = Camera.main.GetComponent<GenerateMap> ();
+	public override void addFloor (GameObject go)
+	{
+		Debug.Log("add floor" + go.tag);
+		if (go.tag == "Floor" && !go.GetComponent<Floor>().isDug()) {
+			Debug.Log("add floor2\t");
+			floors.Add(go);
+		}
+		if (go.tag == "HardFloor") {
+			floors.Add(go);
+		}
 	}
 	public override Vector2 decideMovement() {
 		//get player position

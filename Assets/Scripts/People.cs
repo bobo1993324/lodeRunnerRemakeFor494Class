@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public abstract class People : MonoBehaviour {
 	public float runSpeed = 4;
@@ -8,20 +9,25 @@ public abstract class People : MonoBehaviour {
 	
 	public int wallOnRightCount = 0;
 	public int wallOnLeftCount = 0;
-	public int onFloorCount = 0;
 	public int onLadderCenterCount = 0;
 	public int onLadderDownCount = 0;
 	public int onLadderCount = 0;
 	public int onStickCount = 0;
-	
+
+	public List<GameObject> floors = new List<GameObject> ();
+	protected GenerateMap map;
+	void Start() {
+		map = Camera.main.GetComponent<GenerateMap> ();
+	}
+
+	bool onFloor() {
+		return floors.Count > 0;
+	}
 	bool hasWallOnRight() {
 		return wallOnRightCount > 0;
 	}
 	bool hasWallOnLeft() {
 		return wallOnLeftCount > 0;
-	}
-	bool onFloor() {
-		return onFloorCount > 0; 
 	}
 	bool onStick() {
 		return onStickCount > 0;
@@ -32,13 +38,9 @@ public abstract class People : MonoBehaviour {
 	protected bool canGoDown() {
 		return (onLadderDownCount > 0 || onStick()) && !onFloor () ;
 	}
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected void Update () {
 		if (onStick() || onFloor()) {
 			adjustVerticalPosition();
 		}
@@ -47,7 +49,7 @@ public abstract class People : MonoBehaviour {
 		}
 
 		//TODO disable  falling at start when the maps is still in construction
-		if (onFloorCount + onLadderCount + onLadderDownCount == 0 
+		if (!onFloor() && onLadderCount + onLadderDownCount == 0 
 		    && !onStick()) {
 			//falling
 			Vector3 previousPosition = transform.position;
@@ -91,4 +93,9 @@ public abstract class People : MonoBehaviour {
 		transform.position = previousPosition;
 	}
 	public abstract Vector2 decideMovement();
+	public abstract void addFloor(GameObject go);
+	public void removeFloor(GameObject go) {
+		floors.Remove (go);
+	}
+
 }

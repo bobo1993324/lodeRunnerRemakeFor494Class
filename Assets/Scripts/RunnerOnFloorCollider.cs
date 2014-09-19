@@ -8,13 +8,13 @@ public class RunnerOnFloorCollider : MonoBehaviour {
 	}
 	void OnTriggerEnter2D(Collider2D coll) {
 		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor") {
-			people.onFloorCount ++;
+			people.addFloor(coll.gameObject);
 		}
 	}
 	
 	void OnTriggerExit2D(Collider2D coll) {
 		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor") {
-			people.onFloorCount --;
+			people.removeFloor(coll.gameObject);
 		}
 	}
 }
