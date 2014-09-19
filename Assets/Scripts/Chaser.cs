@@ -4,17 +4,6 @@ using System.Collections.Generic;
 
 public class Chaser : People {
 	private GameObject player;
-	public override void addFloor (GameObject go)
-	{
-		Debug.Log("add floor" + go.tag);
-		if (go.tag == "Floor" && !go.GetComponent<Floor>().isDug()) {
-			Debug.Log("add floor2\t");
-			floors.Add(go);
-		}
-		if (go.tag == "HardFloor") {
-			floors.Add(go);
-		}
-	}
 	public override Vector2 decideMovement() {
 		//get player position
 		player = map.getPlayer ();
@@ -66,6 +55,12 @@ public class Chaser : People {
 
 		return new Vector2(0, 0);
 	}
+	public override void die ()
+	{
+		Destroy (gameObject);
+		Camera.main.GetComponent<GenerateMap> ().respawnEnermy ();
+		//Respawn
+	}
 	private Vector2 goLeft() {
 		Debug.Log("go left");
 		return new Vector2 (-1, 0);
@@ -83,12 +78,11 @@ public class Chaser : People {
 	}
 	private Vector2 goToNearest(List<float> candidatesPosition, float myx, float playerx) {
 		int minIdx = 0;
-		float minDistance = Mathf.Abs(candidatesPosition[0] - myx)
-			+ Mathf.Abs(candidatesPosition[0] - playerx);
+		float minDistance = Mathf.Abs(candidatesPosition[0] - playerx);
 		for(int i = 1; i < candidatesPosition.Count; i++) {
 			if (Mathf.Abs(candidatesPosition[i] - myx) 
 			    + Mathf.Abs(candidatesPosition[i] - playerx)
-			    > minDistance) {
+			    < minDistance) {
 				minIdx = i;
 			}
 		}

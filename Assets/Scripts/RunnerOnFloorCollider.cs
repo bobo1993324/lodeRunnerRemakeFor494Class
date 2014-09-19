@@ -7,7 +7,8 @@ public class RunnerOnFloorCollider : MonoBehaviour {
 		people = gameObject.GetComponentInParent<People> ();
 	}
 	void OnTriggerEnter2D(Collider2D coll) {
-		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor") {
+		if ((coll.gameObject.tag == "Floor" && !coll.gameObject.GetComponent<Floor>().isDug()) 
+		    || coll.gameObject.tag == "HardFloor") {
 			people.addFloor(coll.gameObject);
 		}
 	}

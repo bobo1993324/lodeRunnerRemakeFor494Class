@@ -13,12 +13,13 @@ public class GenerateMap : MonoBehaviour {
 	public GameObject runnerPrefab;
 	public GameObject chaserPrefab;
 	public GameObject hiddenLadderPrefab;
-	
-	private Dictionary<string, GameObject> tilePrefabDictionary;
-
-	private GameObject[,] gameObjectMatrix;
 	public int width;
 	public int height;
+
+	private Dictionary<string, GameObject> tilePrefabDictionary;
+	private GameObject[,] gameObjectMatrix;
+	private System.Random rand = new System.Random ();
+
 	public GameObject getObjectAt(int x, int y) {
 		return gameObjectMatrix [x, y];
 	}
@@ -40,6 +41,18 @@ public class GenerateMap : MonoBehaviour {
 			}
 		}
 		return result;
+	}
+	public void respawnEnermy() {
+		while (true) {
+			int targetY = height - 1;
+			int targetX = rand.Next (1, width - 1);
+			if (gameObjectMatrix[targetX, targetY] == null) {
+				Instantiate(chaserPrefab,
+				            new Vector2(targetX, targetY),
+				            Quaternion.identity);
+				return;
+			}
+		}
 	}
 	// Use this for initialization
 	void Start () {
@@ -76,10 +89,12 @@ public class GenerateMap : MonoBehaviour {
 				string gid = tilesList[i].Attributes["gid"].Value;
 				if (gid != "0") {
 					string tileName = tileMap[tilesList[i].Attributes["gid"].Value];
-					gameObjectMatrix[x, y] = 
-						Instantiate(tilePrefabDictionary[tileName],
+					GameObject go =	Instantiate(tilePrefabDictionary[tileName],
 					            new Vector2(x, y),
 					            Quaternion.identity) as GameObject;
+					if (go.tag != "Chaser") {
+						gameObjectMatrix[x, y] = go;
+					}
 				}
 			}
 		}

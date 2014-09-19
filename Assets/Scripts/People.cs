@@ -92,10 +92,13 @@ public abstract class People : MonoBehaviour {
 		previousPosition.y = Mathf.Round(previousPosition.y);
 		transform.position = previousPosition;
 	}
-	public abstract Vector2 decideMovement();
-	public abstract void addFloor(GameObject go);
+	public void addFloor(GameObject go) {
+		floors.Add (go);
+	}
 	public void removeFloor(GameObject go) {
 		floors.Remove (go);
 	}
+	public abstract Vector2 decideMovement();
+	public abstract void die();
 
 }
