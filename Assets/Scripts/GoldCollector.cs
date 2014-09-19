@@ -2,20 +2,10 @@
 using System.Collections;
 
 public class GoldCollector : MonoBehaviour {
-	public int collectedGold = 0;
-	public int totalGold = 1;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	private int collectedGold = 0;
+	private int totalGold = 0;
 
 	public void collectGold() {
-		collectedGold ++;
 		if (collectedGold == totalGold) {
 			GameObject[] hiddenLadders = GameObject.FindGameObjectsWithTag("HiddenLadder");
 			foreach (GameObject hiddenLadder in hiddenLadders) {
@@ -23,5 +13,8 @@ public class GoldCollector : MonoBehaviour {
 			}
 			Debug.Log("Hide");
 		}
+	}
+	public void addGoldToCollect() {
+		totalGold ++;
 	}
 }

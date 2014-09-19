@@ -16,7 +16,7 @@ public abstract class People : MonoBehaviour {
 
 	public List<GameObject> floors = new List<GameObject> ();
 	protected GenerateMap map;
-	void Start() {
+	protected void Start() {
 		map = Camera.main.GetComponent<GenerateMap> ();
 	}
 
@@ -100,5 +100,4 @@ public abstract class People : MonoBehaviour {
 	}
 	public abstract Vector2 decideMovement();
 	public abstract void die();
-
 }

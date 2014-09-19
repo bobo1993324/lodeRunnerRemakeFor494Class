@@ -17,7 +17,7 @@ public class GenerateMap : MonoBehaviour {
 	public int height;
 
 	private Dictionary<string, GameObject> tilePrefabDictionary;
-	private GameObject[,] gameObjectMatrix;
+	public GameObject[,] gameObjectMatrix;
 	private System.Random rand = new System.Random ();
 
 	public GameObject getObjectAt(int x, int y) {
@@ -85,7 +85,7 @@ public class GenerateMap : MonoBehaviour {
 			XmlNodeList tilesList = layer.ChildNodes[0].ChildNodes;
 			for (int i = 0; i < tilesList.Count; i++) {
 				int x = i % width;
-				int y = 14 - i / width;
+				int y = height - 1 - i / width;
 				string gid = tilesList[i].Attributes["gid"].Value;
 				if (gid != "0") {
 					string tileName = tileMap[tilesList[i].Attributes["gid"].Value];
@@ -94,6 +94,9 @@ public class GenerateMap : MonoBehaviour {
 					            Quaternion.identity) as GameObject;
 					if (go.tag != "Chaser") {
 						gameObjectMatrix[x, y] = go;
+					}
+					if (tileName == "gold") {
+						Camera.main.GetComponent<GoldCollector>().addGoldToCollect();
 					}
 				}
 			}

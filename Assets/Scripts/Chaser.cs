@@ -3,7 +3,49 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Chaser : People {
+	public GameObject goldPrefab;
+	public float dropGoldRate = 0.05f;
+	public float pitDownTime = 3f;
+
 	private GameObject player;
+	public int goldCount = 0;
+	private System.Random rand = new System.Random();
+	private bool inPit = false;
+	void Start() {
+		base.Start ();
+		StartCoroutine ("dropGoldRandomly");
+	}
+	void Update() {
+		if(!inPit) {
+			base.Update();
+		}
+	}
+	IEnumerator dropGoldRandomly() {
+		while (true) {
+			yield return new WaitForSeconds(1);
+			if (rand.NextDouble() < dropGoldRate) {
+				dropGold();
+			}
+		}
+	}
+	public void dropAllGold() {
+		while(goldCount > 0) {
+			goldCount --;
+			dropGold();
+		}
+	}
+	public void collectGold() {
+		goldCount ++;
+	}
+	public void dropGold() {
+		Debug.Log ("Drop gold");
+		if (goldCount > 0) {
+			goldCount --;
+			GameObject go = Instantiate(goldPrefab, new Vector2(Mathf.Round(gameObject.transform.position.x),
+			                                    Mathf.Round(gameObject.transform.position.y)),
+			            Quaternion.identity) as GameObject;
+		}
+	}
 	public override Vector2 decideMovement() {
 		//get player position
 		player = map.getPlayer ();
@@ -41,7 +83,7 @@ public class Chaser : People {
 			}
 			List<float> candidatesPosition = new List<float>();
 			for (int i = 0; i < this.map.width; i++) {
-				GameObject goDown = this.map.getObjectAt(i, myYRounded);
+				GameObject goDown = this.map.getObjectAt(i, myYRounded - 1);
 				GameObject goCurrentLevel = this.map.getObjectAt(i, myYRounded);
 				if ((goDown == null || !goDown.tag.Contains("Floor")) 
 				    && (goCurrentLevel == null || !goCurrentLevel.tag.Contains("Floor"))) {
@@ -91,5 +133,20 @@ public class Chaser : People {
 		} else {
 			return goLeft();
 		}
+	}
+	public void dropToPit() {
+		Debug.Log ("dropToPit");
+		inPit = true;
+		StartCoroutine ("reviveFromPit");
+	}
+	IEnumerator reviveFromPit() {
+		yield return new WaitForSeconds(pitDownTime);
+		Vector3 myPosition = transform.position;
+		myPosition.y += 1;
+		transform.position = myPosition;
+		Vector2 move = decideMovement ();
+		myPosition.x += 0.4f * move.x;
+		transform.position = myPosition;
+		inPit = false;
 	}
 }

@@ -4,13 +4,19 @@ using System.Collections;
 public class RunnerOnFloorCollider : MonoBehaviour {
 	People people;
 	void Start() {
-		people = gameObject.GetComponentInParent<People> ();
 	}
 	void OnTriggerEnter2D(Collider2D coll) {
+		if (people == null) {
+			people = gameObject.GetComponentInParent<People> ();
+		}
 		if ((coll.gameObject.tag == "Floor" && !coll.gameObject.GetComponent<Floor>().isDug()) 
 		    || coll.gameObject.tag == "HardFloor") {
 			people.addFloor(coll.gameObject);
+		} else if ((coll.gameObject.tag == "ChaserDugFloor" && gameObject.GetComponentInParent<Chaser>() != null)) {
+			Chaser chaser = gameObject.GetComponentInParent<Chaser>();
+			chaser.dropToPit();
 		}
+
 	}
 	
 	void OnTriggerExit2D(Collider2D coll) {
