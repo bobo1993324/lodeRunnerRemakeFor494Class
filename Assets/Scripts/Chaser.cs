@@ -11,11 +11,11 @@ public class Chaser : People {
 	public int goldCount = 0;
 	private System.Random rand = new System.Random();
 	public bool inPit = false;
-	void Start() {
+	new void Start() {
 		base.Start ();
 		StartCoroutine ("dropGoldRandomly");
 	}
-	void Update() {
+	new void Update() {
 		if(!inPit) {
 			base.Update();
 		}
@@ -34,8 +34,8 @@ public class Chaser : People {
 		}
 	}
 	public void dropAllGold() {
+		Debug.Log ("dropAllGold");
 		while(goldCount > 0) {
-			goldCount --;
 			dropGold();
 		}
 	}

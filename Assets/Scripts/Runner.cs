@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Runner : People {
-	void Update() {
+	new void Update() {
 		if (Input.GetKey (KeyCode.Z)) {
 			Debug.Log("digHoleLeft");
 			GameObject goLeftDown = map.getObjectAt(

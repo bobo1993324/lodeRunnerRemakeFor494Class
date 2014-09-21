@@ -17,6 +17,8 @@ public class RunnerOnFloorCollider : MonoBehaviour {
 		} else if ((coll.gameObject.tag == "ChaserDugFloor" && gameObject.GetComponentInParent<Chaser>() != null)) {
 			Chaser chaser = gameObject.GetComponentInParent<Chaser>();
 			chaser.dropToPit();
+		} else if (coll.gameObject.name == "DropAllGoldFloorCollider" && people.tag == "Chaser") {
+			(people as Chaser).dropAllGold();
 		}
 
 	}
