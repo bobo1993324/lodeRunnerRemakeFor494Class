@@ -180,6 +180,7 @@ MonoBehaviour:
   runnerPrefab: {fileID: 100000, guid: ae49127850af3ce4eb79f9608d8a1d41, type: 2}
   chaserPrefab: {fileID: 100000, guid: 9abebc64b319b4b45be12b79f412d73a, type: 2}
   hiddenLadderPrefab: {fileID: 100002, guid: 3cb05e817efb51f418cc11581454b3d3, type: 2}
+  arrowPrefab: {fileID: 100000, guid: 20bb704296f4d6d4488d6076a1983017, type: 2}
   width: 0
   height: 0
 --- !u!114 &1013138154

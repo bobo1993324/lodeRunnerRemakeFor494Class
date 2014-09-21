@@ -55,6 +55,33 @@ public class Chaser : People {
 		Vector3 myPostion = transform.position;
 		int myXRounded = Mathf.RoundToInt (myPostion.x);
 		int myYRounded = Mathf.RoundToInt (myPostion.y);
+		MoveDirection md = map.getChaseDirection (playerXRounded, playerYRounded, myXRounded, myYRounded);
+		if (md == MoveDirection.GO_LEFT || md == MoveDirection.GO_RIGHT) {
+			if (myPostion.y - myYRounded > 0.05f) {
+				return goDown();
+			} else if (myPostion.y - myYRounded < -0.05f) {
+				return goUp();
+			} else {
+				if (md == MoveDirection.GO_LEFT)
+					return goLeft();
+				else 
+					return goRight();
+			}
+		} else if (md == MoveDirection.GO_DOWN || md == MoveDirection.GO_UP) {
+			//first move to center
+			if (myPostion.x - myXRounded > 0.05f) {
+				return goLeft();
+			} else if (myPostion.x - myXRounded < -0.05f) {
+				return goRight();
+			} else {
+				if (md == MoveDirection.GO_DOWN)
+					return goDown();
+				else 
+					return goUp();
+			}
+		}
+
+		//use lame algorithm if cannot precompute path
 		if (Mathf.Abs (playerPosition.y - myPostion.y) < 0.04) {
 			//on same level
 			if (myXRounded > playerXRounded) {
@@ -104,19 +131,35 @@ public class Chaser : People {
 		//Respawn
 	}
 	private Vector2 goLeft() {
-		Debug.Log("go left");
+		Debug.Log ("<-");
 		return new Vector2 (-1, 0);
 	}
 	private Vector2 goRight() {
-		Debug.Log("go right");
+		Debug.Log ("->");
 		return new Vector2 (1, 0);
 	}
 	private Vector2 goUp() {
-		Debug.Log("go up");
+		Debug.Log ("^");
 		return new Vector2(0, 1);
 	}
 	private Vector2 goDown() {
+		Debug.Log ("v");
 		return new Vector2 (0, -1);
+	}
+	public void dropToPit() {
+		Debug.Log ("dropToPit");
+		inPit = true;
+		StartCoroutine ("reviveFromPit");
+	}
+	IEnumerator reviveFromPit() {
+		yield return new WaitForSeconds(pitDownTime);
+		Vector3 myPosition = transform.position;
+		myPosition.y += 1;
+		transform.position = myPosition;
+		Vector2 move = decideMovement ();
+		myPosition.x += 0.4f * move.x;
+		transform.position = myPosition;
+		inPit = false;
 	}
 	private Vector2 goToNearest(List<float> candidatesPosition, float myx, float playerx) {
 		int minIdx = 0;
@@ -133,20 +176,5 @@ public class Chaser : People {
 		} else {
 			return goLeft();
 		}
-	}
-	public void dropToPit() {
-		Debug.Log ("dropToPit");
-		inPit = true;
-		StartCoroutine ("reviveFromPit");
-	}
-	IEnumerator reviveFromPit() {
-		yield return new WaitForSeconds(pitDownTime);
-		Vector3 myPosition = transform.position;
-		myPosition.y += 1;
-		transform.position = myPosition;
-		Vector2 move = decideMovement ();
-		myPosition.x += 0.4f * move.x;
-		transform.position = myPosition;
-		inPit = false;
 	}
 }

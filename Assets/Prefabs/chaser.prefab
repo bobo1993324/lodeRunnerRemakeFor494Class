@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0c5c882f449a74fa7f3e3d802a9afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 4
+  runSpeed: 3
   climbSpeed: 4
   fallspeed: 4
   wallOnRightCount: 0
@@ -479,6 +479,7 @@ MonoBehaviour:
   floors: []
   goldPrefab: {fileID: 100000, guid: 7e9c8fd5b69da10429a82a3553c68ab2, type: 2}
   dropGoldRate: .0500000007
+  pitDownTime: 3
   goldCount: 0
 --- !u!114 &11400002
 MonoBehaviour:
