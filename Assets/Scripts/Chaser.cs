@@ -10,7 +10,7 @@ public class Chaser : People {
 	private GameObject player;
 	public int goldCount = 0;
 	private System.Random rand = new System.Random();
-	private bool inPit = false;
+	public bool inPit = false;
 	void Start() {
 		base.Start ();
 		StartCoroutine ("dropGoldRandomly");
@@ -63,7 +63,7 @@ public class Chaser : People {
 		int myYRounded = Mathf.RoundToInt (myPostion.y);
 
 		MoveDirection md = map.getChaseDirection (playerXRounded, playerYRounded, myXRounded, myYRounded);
-		Debug.Log ("decideMovement " + myXRounded + " " + myYRounded + " " + md); 
+		//Debug.Log ("decideMovement " + myXRounded + " " + myYRounded + " " + md); 
 		if (md == MoveDirection.GO_LEFT || md == MoveDirection.GO_RIGHT) {
 			if (myPostion.y - myYRounded > 0.05f && onLadderCount > 0) {
 				return goDown();

@@ -12,6 +12,8 @@ public class RunnerOnFloorCollider : MonoBehaviour {
 		if ((coll.gameObject.tag == "Floor" && !coll.gameObject.GetComponent<Floor>().isDug()) 
 		    || coll.gameObject.tag == "HardFloor") {
 			people.addFloor(coll.gameObject);
+		} else if (coll.gameObject.tag == "Chaser" && coll.gameObject.GetComponent<People>() != people) {
+			people.addFloor(coll.gameObject);
 		} else if ((coll.gameObject.tag == "ChaserDugFloor" && gameObject.GetComponentInParent<Chaser>() != null)) {
 			Chaser chaser = gameObject.GetComponentInParent<Chaser>();
 			chaser.dropToPit();
@@ -20,7 +22,7 @@ public class RunnerOnFloorCollider : MonoBehaviour {
 	}
 	
 	void OnTriggerExit2D(Collider2D coll) {
-		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor") {
+		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor" || coll.gameObject.tag == "Chaser") {
 			people.removeFloor(coll.gameObject);
 		}
 	}

@@ -19,6 +19,9 @@ public class RunnderLadderCollider : MonoBehaviour {
 		} else if (people.tag == "Chaser" && coll.gameObject.tag == "Gold") {
 			(people as Chaser).collectGold();
 			Destroy(coll.gameObject);
+		} else if (coll.gameObject.tag == "Chaser" && people.tag == "Player"
+		           && !coll.gameObject.GetComponent<Chaser>().inPit) {
+			people.die();
 		}
 	}
 	
