@@ -16,6 +16,7 @@ public abstract class People : MonoBehaviour {
 
 	public List<GameObject> floors = new List<GameObject> ();
 	protected GenerateMap map;
+	protected bool updateDisabled = false;
 	protected void Start() {
 		map = Camera.main.GetComponent<GenerateMap> ();
 	}
@@ -41,6 +42,9 @@ public abstract class People : MonoBehaviour {
 	
 	// Update is called once per frame
 	protected void Update () {
+		if (updateDisabled) {
+			return;
+		}
 		if (onStick() || onFloor()) {
 			adjustVerticalPosition();
 		}

@@ -24,7 +24,12 @@ public class Chaser : People {
 		while (true) {
 			yield return new WaitForSeconds(1);
 			if (rand.NextDouble() < dropGoldRate) {
-				dropGold();
+				Vector3 myPostion = transform.position;
+				int myXRounded = Mathf.RoundToInt (myPostion.x);
+				int myYRounded = Mathf.RoundToInt (myPostion.y);
+				if (map.gameObjectMatrix[myXRounded, myYRounded] == null) {
+					dropGold();
+				}
 			}
 		}
 	}
@@ -44,6 +49,7 @@ public class Chaser : People {
 			GameObject go = Instantiate(goldPrefab, new Vector2(Mathf.Round(gameObject.transform.position.x),
 			                                    Mathf.Round(gameObject.transform.position.y)),
 			            Quaternion.identity) as GameObject;
+			go.GetComponent<Gold>().disableCollectForSeconds(1);
 		}
 	}
 	public override Vector2 decideMovement() {
@@ -55,11 +61,13 @@ public class Chaser : People {
 		Vector3 myPostion = transform.position;
 		int myXRounded = Mathf.RoundToInt (myPostion.x);
 		int myYRounded = Mathf.RoundToInt (myPostion.y);
+
 		MoveDirection md = map.getChaseDirection (playerXRounded, playerYRounded, myXRounded, myYRounded);
+		Debug.Log ("decideMovement " + myXRounded + " " + myYRounded + " " + md); 
 		if (md == MoveDirection.GO_LEFT || md == MoveDirection.GO_RIGHT) {
-			if (myPostion.y - myYRounded > 0.05f) {
+			if (myPostion.y - myYRounded > 0.05f && onLadderCount > 0) {
 				return goDown();
-			} else if (myPostion.y - myYRounded < -0.05f) {
+			} else if (myPostion.y - myYRounded < -0.05f && onLadderCount > 0) {
 				return goUp();
 			} else {
 				if (md == MoveDirection.GO_LEFT)
@@ -131,19 +139,19 @@ public class Chaser : People {
 		//Respawn
 	}
 	private Vector2 goLeft() {
-		Debug.Log ("<-");
+		//Debug.Log ("<-");
 		return new Vector2 (-1, 0);
 	}
 	private Vector2 goRight() {
-		Debug.Log ("->");
+		//Debug.Log ("->");
 		return new Vector2 (1, 0);
 	}
 	private Vector2 goUp() {
-		Debug.Log ("^");
+		//Debug.Log ("^");
 		return new Vector2(0, 1);
 	}
 	private Vector2 goDown() {
-		Debug.Log ("v");
+		//Debug.Log ("v");
 		return new Vector2 (0, -1);
 	}
 	public void dropToPit() {
@@ -152,18 +160,22 @@ public class Chaser : People {
 		StartCoroutine ("reviveFromPit");
 	}
 	IEnumerator reviveFromPit() {
+		updateDisabled = true; // disable update sothat it is not pushed to the center on leftorrightwall
 		yield return new WaitForSeconds(pitDownTime);
 		Vector3 myPosition = transform.position;
 		myPosition.y += 1;
 		transform.position = myPosition;
 		Vector2 move = decideMovement ();
 		myPosition.x += 0.4f * move.x;
+		Debug.Log ("revive " + move.x);
 		transform.position = myPosition;
 		inPit = false;
+		yield return new WaitForSeconds(0.1f);
+		updateDisabled = false;
 	}
 	private Vector2 goToNearest(List<float> candidatesPosition, float myx, float playerx) {
 		int minIdx = 0;
-		float minDistance = Mathf.Abs(candidatesPosition[0] - playerx);
+		float minDistance = Mathf.Abs(candidatesPosition[0] - playerx) +  Mathf.Abs(candidatesPosition[0] - myx);
 		for(int i = 1; i < candidatesPosition.Count; i++) {
 			if (Mathf.Abs(candidatesPosition[i] - myx) 
 			    + Mathf.Abs(candidatesPosition[i] - playerx)

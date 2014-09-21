@@ -103,11 +103,11 @@ public class GenerateMap : MonoBehaviour {
 					if (go.tag == "Player") {
 						runnerGameObject = go;
 					}
-					if (go.tag != "Chaser" && go.tag != "Player") {
-						gameObjectMatrix[x, y] = go;
-					}
-					if (tileName == "gold") {
+					if (go.tag == "Gold") {
 						Camera.main.GetComponent<GoldCollector>().addGoldToCollect();
+					}
+					if (go.tag != "Chaser" && go.tag != "Player" && go.tag != "Gold") {
+						gameObjectMatrix[x, y] = go;
 					}
 				}
 			}
@@ -236,34 +236,34 @@ public class GenerateMap : MonoBehaviour {
 		}
 		// visualize
 
-//		int playerX = 6;
-//		int playerY = 10;
-//		for (int i = 0; i < width; i++) {
-//			for (int j = 0; j < height; j++) {
-//				int key = chaseDirectionKey(playerX, playerY, i, j);
-//				if (!chaseDirection.ContainsKey(key)) {
-//					continue;
-//				}
-//				MoveDirection m = (MoveDirection)chaseDirection[key];
-//				if (m == MoveDirection.GO_UP) {
-//					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
-//						.transform.Rotate(0, 0, 90f);
-//				}
-//				if (m == MoveDirection.GO_DOWN) {
-//					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
-//						.transform.Rotate(0, 0, -90f);
-//				}
-//				if (m == MoveDirection.GO_RIGHT) {
-//					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
-//						.transform.Rotate(0, 0, 0);
-//				}
-//				
-//				if (m == MoveDirection.GO_LEFT) {
-//					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
-//						.transform.Rotate(0, 0, 180);
-//				}
-//			}
-//		}
+		int playerX = 6;
+		int playerY = 10;
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				int key = chaseDirectionKey(playerX, playerY, i, j);
+				if (!chaseDirection.ContainsKey(key)) {
+					continue;
+				}
+				MoveDirection m = (MoveDirection)chaseDirection[key];
+				if (m == MoveDirection.GO_UP) {
+					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
+						.transform.Rotate(0, 0, 90f);
+				}
+				if (m == MoveDirection.GO_DOWN) {
+					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
+						.transform.Rotate(0, 0, -90f);
+				}
+				if (m == MoveDirection.GO_RIGHT) {
+					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
+						.transform.Rotate(0, 0, 0);
+				}
+				
+				if (m == MoveDirection.GO_LEFT) {
+					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
+						.transform.Rotate(0, 0, 180);
+				}
+			}
+		}
 
 	}
 	

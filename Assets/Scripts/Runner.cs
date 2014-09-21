@@ -15,6 +15,7 @@ public class Runner : People {
 			);
 			if ((goLeftDown != null && goLeftDown.tag == "Floor")
 			    && (goLeft == null || !goLeft.tag.Contains("Floor"))) {
+				centerX();
 				goLeftDown.GetComponent<Floor>().dig();
 			}
 		} else if (Input.GetKey(KeyCode.X)) {
@@ -28,6 +29,7 @@ public class Runner : People {
 				);
 			if ((goRightDown != null && goRightDown.tag == "Floor")
 			    && (goRight == null || !goRight.tag.Contains("Floor"))) {
+				centerX();
 				goRightDown.GetComponent<Floor>().dig();
 			}
 		}
@@ -41,4 +43,10 @@ public class Runner : People {
 		Destroy (gameObject);
 		//TODO start again
 	}
+	private void centerX() {
+		Vector3 p = transform.position;
+		p.x = Mathf.Round(p.x);
+		transform.position = p;
+	}
+	
 }
