@@ -12,7 +12,7 @@ public class RunnerOnFloorCollider : MonoBehaviour {
 		if ((coll.gameObject.tag == "Floor" && !coll.gameObject.GetComponent<Floor>().isDug()) 
 		    || coll.gameObject.tag == "HardFloor") {
 			people.addFloor(coll.gameObject);
-		} else if (coll.gameObject.tag == "Chaser" && coll.gameObject.GetComponent<People>() != people) {
+		} else if (coll.gameObject.tag == "Chaser" && coll.gameObject.GetComponent<Chaser>().inPit) {
 			people.addFloor(coll.gameObject);
 		} else if ((coll.gameObject.tag == "ChaserDugFloor" && gameObject.GetComponentInParent<Chaser>() != null)) {
 			Chaser chaser = gameObject.GetComponentInParent<Chaser>();
