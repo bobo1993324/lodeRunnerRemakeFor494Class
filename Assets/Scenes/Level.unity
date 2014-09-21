@@ -88,6 +88,7 @@ GameObject:
   - 81: {fileID: 1013138148}
   - 114: {fileID: 1013138153}
   - 114: {fileID: 1013138154}
+  - 114: {fileID: 1013138155}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -192,5 +193,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de86b1832c99fd0428947dff5b8f7c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectedGold: 0
+  totalGold: 0
+--- !u!114 &1013138155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1013138147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 753b18d1c044c434ab17040f4c0f8226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

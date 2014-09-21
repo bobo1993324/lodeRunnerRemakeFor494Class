@@ -175,6 +175,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitTime: 5
   healTime: 2
+  digHPMax: 2
+  digHP: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
