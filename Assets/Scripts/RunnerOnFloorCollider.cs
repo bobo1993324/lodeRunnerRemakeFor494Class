@@ -9,10 +9,7 @@ public class RunnerOnFloorCollider : MonoBehaviour {
 		if (people == null) {
 			people = gameObject.GetComponentInParent<People> ();
 		}
-		if ((coll.gameObject.tag == "Floor" && !coll.gameObject.GetComponent<Floor>().isDug()) 
-		    || coll.gameObject.tag == "HardFloor") {
-			people.addFloor(coll.gameObject);
-		} else if (coll.gameObject.tag == "Chaser" && coll.gameObject.GetComponent<Chaser>().inPit) {
+		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor") {
 			people.addFloor(coll.gameObject);
 		} else if ((coll.gameObject.tag == "ChaserDugFloor" && gameObject.GetComponentInParent<Chaser>() != null)) {
 			Chaser chaser = gameObject.GetComponentInParent<Chaser>();
@@ -20,11 +17,17 @@ public class RunnerOnFloorCollider : MonoBehaviour {
 		} else if (coll.gameObject.name == "DropAllGoldFloorCollider" && people.tag == "Chaser") {
 			(people as Chaser).dropAllGold();
 		}
+//		else if (coll.gameObject.tag == "Chaser" 
+//		           && coll.gameObject.GetComponentInChildren<RunnerOnFloorCollider>() != this
+//		           && !coll.gameObject.GetComponent<Chaser>().inPit) {
+//			people.addFloor(coll.gameObject);
+//		}
 
 	}
 	
 	void OnTriggerExit2D(Collider2D coll) {
-		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor" || coll.gameObject.tag == "Chaser") {
+		if (coll.gameObject.tag == "Floor" 
+		    || coll.gameObject.tag == "HardFloor") {
 			people.removeFloor(coll.gameObject);
 		}
 	}

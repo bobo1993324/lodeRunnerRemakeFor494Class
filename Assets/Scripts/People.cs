@@ -20,9 +20,19 @@ public abstract class People : MonoBehaviour {
 	protected void Start() {
 		map = Camera.main.GetComponent<GenerateMap> ();
 	}
-
 	bool onFloor() {
-		return floors.Count > 0;
+		if (floors.Count > 1) {
+			return true;
+		}
+		if (floors.Count == 1  && floors[0].GetComponent<Floor>() != null )
+			Debug.Log (floors[0].GetComponent<Floor>().fallTrough() 
+			           + " " + floors[0].GetComponent<Floor>().containPeople(gameObject));
+		if (floors.Count == 1 && floors[0].GetComponent<Floor>() != null 
+		    && !floors[0].GetComponent<Floor>().fallTrough()
+		    && !floors[0].GetComponent<Floor>().containPeople(gameObject)) {
+			return true;
+		}
+		return false;
 	}
 	bool hasWallOnRight() {
 		return wallOnRightCount > 0;

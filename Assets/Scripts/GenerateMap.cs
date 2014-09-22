@@ -78,7 +78,9 @@ public class GenerateMap : MonoBehaviour {
 
 	private void loadMap() {
 		XmlDocument xmlDoc = new XmlDocument ();
-		xmlDoc.Load ("Assets/Maps/" + mapName + ".tmx");
+		if(mapName == "Level1")
+			xmlDoc.LoadXml (new MapLevel1().xml);
+//		xmlDoc.Load ("./Assets/Maps/Level1.tmx");
 		XmlNodeList tilesetList = xmlDoc.GetElementsByTagName ("tileset");
 		Dictionary<string, string> tileMap = new Dictionary<string, string>();
 		foreach (XmlNode tileset in tilesetList) {

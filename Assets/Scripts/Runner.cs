@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class Runner : People {
+	bool isDead = false;
+	float nextDigTime = 0;
 	new void Update() {
 		if (Input.GetKey (KeyCode.Z)) {
 			Debug.Log("digHoleLeft");
@@ -14,9 +16,12 @@ public class Runner : People {
 				Mathf.RoundToInt(transform.position.y)
 			);
 			if ((goLeftDown != null && goLeftDown.tag == "Floor")
-			    && (goLeft == null || !goLeft.tag.Contains("Floor"))) {
+			    && (goLeft == null || !goLeft.tag.Contains("Floor"))
+			    && Time.time > nextDigTime) {
 				centerX();
 				goLeftDown.GetComponent<Floor>().dig();
+				nextDigTime = Time.time + 0.5f;
+				Debug.Log ("nextDigTime " + nextDigTime); 
 			}
 		} else if (Input.GetKey(KeyCode.X)) {
 			GameObject goRightDown = map.getObjectAt(
@@ -28,9 +33,11 @@ public class Runner : People {
 				Mathf.RoundToInt(transform.position.y)
 				);
 			if ((goRightDown != null && goRightDown.tag == "Floor")
-			    && (goRight == null || !goRight.tag.Contains("Floor"))) {
+			    && (goRight == null || !goRight.tag.Contains("Floor"))
+			    && Time.time > nextDigTime) {
 				centerX();
 				goRightDown.GetComponent<Floor>().dig();
+				nextDigTime = Time.time + 0.5f;
 			}
 		}
 		base.Update ();
@@ -40,8 +47,16 @@ public class Runner : People {
 	}
 	public override void die ()
 	{
+		if (!isDead) {
+			isDead = true;
+			gameObject.renderer.enabled = false;
+			StartCoroutine ("reloadLevelIn1Second");
+		}
+	}
+	IEnumerator reloadLevelIn1Second() {
+		yield return new WaitForSeconds (1);
+		Application.LoadLevel (Application.loadedLevel);
 		Destroy (gameObject);
-		//TODO start again
 	}
 	private void centerX() {
 		Vector3 p = transform.position;

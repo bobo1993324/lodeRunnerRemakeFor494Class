@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class FloorKillCollider : MonoBehaviour {
-	List<GameObject> goInKillRange = new List<GameObject>();
+	public List<GameObject> goInKillRange = new List<GameObject>();
 	void OnTriggerEnter2D(Collider2D coll) {
 		Debug.Log ("add kill" + coll.gameObject.tag + " " + coll.gameObject.name);
-		if (coll.gameObject.tag == "Runner"
+		if (coll.gameObject.tag == "Player"
 		    || coll.gameObject.tag == "Chaser") {
 			Debug.Log ("add complete");
 			goInKillRange.Add(coll.gameObject);

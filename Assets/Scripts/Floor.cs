@@ -8,30 +8,32 @@ public class Floor : MonoBehaviour {
 	public int digHP;
 	private bool dugByPlayerInLastSecond = false;
 	private bool coroutineStarted = false;
-	enum DigState {
+	public enum DigState {
 		NORMAL,
 		DIGGING,
 		DUG,
 		HEALING
 	}
-	DigState digState = DigState.NORMAL;
+	public DigState digState = DigState.NORMAL;
 	public void dig() {
 		dugByPlayerInLastSecond = true;
+		digHP --;
+		if (digHP == 0) {
+			digComplete();
+			StopCoroutine("digging");
+			coroutineStarted = false;
+		}
 		if (!coroutineStarted) {
 			coroutineStarted = true;
-			digHP = digHPMax;
-			digHP --;
 			StartCoroutine("digging");
 		}
 	}
 	IEnumerator digging() {
 		while (digHP > 0) {
 			dugByPlayerInLastSecond = false;
-			yield return new WaitForSeconds (1);
+			yield return new WaitForSeconds (0.7f);
 			Debug.Log ("dig " + dugByPlayerInLastSecond + digHP); 
-			if (dugByPlayerInLastSecond == true) {
-				digHP --;
-			} else {
+			if (!dugByPlayerInLastSecond) {
 				digHP ++;
 			}
 			if (digHP >= digHPMax) {
@@ -40,8 +42,6 @@ public class Floor : MonoBehaviour {
 				return false;
 			}
 		}
-		digComplete ();
-		coroutineStarted = false;
 	}
 	private void digComplete() {
 		Debug.Log ("dig complete");
@@ -50,8 +50,8 @@ public class Floor : MonoBehaviour {
 		gameObject.renderer.enabled = false;
 		StartCoroutine ("waitForHealing");
 	}
-	public bool isDug() {
-		return digState == DigState.DUG;
+	public bool fallTrough() {
+		return (digState == DigState.DUG || digState == DigState.HEALING) && !containPeople();
 	}
 	IEnumerator waitForHealing() {
 		yield return new WaitForSeconds(this.waitTime);
@@ -59,6 +59,13 @@ public class Floor : MonoBehaviour {
 		yield return new WaitForSeconds(this.healTime);
 		digState = DigState.NORMAL;
 		gameObject.renderer.enabled = true;
+		digHP = digHPMax;
 		gameObject.GetComponentInChildren<FloorKillCollider> ().kill ();
+	}
+	public bool containPeople () {
+		return GetComponentInChildren<FloorKillCollider> ().goInKillRange.Count > 0;
+	}
+	public bool containPeople(GameObject me) {
+		return GetComponentInChildren<FloorKillCollider>().goInKillRange.Contains(me);
 	}
 }

@@ -74,21 +74,19 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
---- !u!1 &1013138147
+--- !u!1 &232972381
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 1013138152}
-  - 20: {fileID: 1013138151}
-  - 92: {fileID: 1013138150}
-  - 124: {fileID: 1013138149}
-  - 81: {fileID: 1013138148}
-  - 114: {fileID: 1013138153}
-  - 114: {fileID: 1013138154}
-  - 114: {fileID: 1013138155}
+  - 4: {fileID: 232972386}
+  - 20: {fileID: 232972385}
+  - 92: {fileID: 232972384}
+  - 124: {fileID: 232972383}
+  - 81: {fileID: 232972382}
+  - 114: {fileID: 232972387}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -96,37 +94,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1013138148
+--- !u!81 &232972382
 AudioListener:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1013138147}
+  m_GameObject: {fileID: 232972381}
   m_Enabled: 1
---- !u!124 &1013138149
+--- !u!124 &232972383
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1013138147}
+  m_GameObject: {fileID: 232972381}
   m_Enabled: 1
---- !u!92 &1013138150
+--- !u!92 &232972384
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1013138147}
+  m_GameObject: {fileID: 232972381}
   m_Enabled: 1
---- !u!20 &1013138151
+--- !u!20 &232972385
 Camera:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1013138147}
+  m_GameObject: {fileID: 232972381}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
+  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -137,7 +135,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -149,62 +147,26 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
---- !u!4 &1013138152
+--- !u!4 &232972386
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1013138147}
+  m_GameObject: {fileID: 232972381}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: 6, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &1013138153
+--- !u!114 &232972387
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1013138147}
+  m_GameObject: {fileID: 232972381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0ad30963044ad54ea0236c2f640a001, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapName: Level1
-  floorPrefab: {fileID: 100000, guid: 9418a4300df080840bd3e08211e48c88, type: 2}
-  goldPrefab: {fileID: 100000, guid: 7e9c8fd5b69da10429a82a3553c68ab2, type: 2}
-  hardFloorPrefab: {fileID: 100000, guid: 9067c47f8e9bd7d4d9d5f9251dfc901e, type: 2}
-  ladderPrefab: {fileID: 100000, guid: ac32121df3a3d7e4192eaa9e7a6346cb, type: 2}
-  stickPrefab: {fileID: 100000, guid: 46ecabc4d2144974497b79483c92eba4, type: 2}
-  runnerPrefab: {fileID: 100000, guid: ae49127850af3ce4eb79f9608d8a1d41, type: 2}
-  chaserPrefab: {fileID: 100000, guid: 9abebc64b319b4b45be12b79f412d73a, type: 2}
-  hiddenLadderPrefab: {fileID: 100002, guid: 3cb05e817efb51f418cc11581454b3d3, type: 2}
-  arrowPrefab: {fileID: 100000, guid: 20bb704296f4d6d4488d6076a1983017, type: 2}
-  width: 0
-  height: 0
---- !u!114 &1013138154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1013138147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de86b1832c99fd0428947dff5b8f7c0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectedGold: 0
-  totalGold: 0
---- !u!114 &1013138155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1013138147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 753b18d1c044c434ab17040f4c0f8226, type: 3}
+  m_Script: {fileID: 11500000, guid: 566920e17e8b7664baa053f78baac855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

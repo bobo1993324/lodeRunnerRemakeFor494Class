@@ -176,7 +176,8 @@ MonoBehaviour:
   waitTime: 5
   healTime: 2
   digHPMax: 2
-  digHP: 0
+  digHP: 2
+  digState: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -188,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8450a7e8c7ee7d14c9219fbba6a4d533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goInKillRange: []
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
