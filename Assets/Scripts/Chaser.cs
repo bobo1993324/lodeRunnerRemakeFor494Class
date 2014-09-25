@@ -49,7 +49,7 @@ public class Chaser : People {
 			GameObject go = Instantiate(goldPrefab, new Vector2(Mathf.Round(gameObject.transform.position.x),
 			                                    Mathf.Round(gameObject.transform.position.y)),
 			            Quaternion.identity) as GameObject;
-			go.GetComponent<Gold>().disableCollectForSeconds(0.5f);
+			go.GetComponent<Gold>().disableCollectForSeconds(1f);
 		}
 	}
 	public override Vector2 decideMovement() {

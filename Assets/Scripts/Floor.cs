@@ -2,66 +2,41 @@
 using System.Collections;
 
 public class Floor : MonoBehaviour {
-	public float waitTime = 5f;
-	public float healTime = 2f;
-	public int digHPMax = 2;
-	public int digHP;
-	private bool dugByPlayerInLastSecond = false;
-	private bool coroutineStarted = false;
-	public enum DigState {
-		NORMAL,
-		DIGGING,
-		DUG,
-		HEALING
+	Animator animator;
+	void Start() {
+		animator = GetComponent<Animator> ();
 	}
-	public DigState digState = DigState.NORMAL;
+	public int digState() {
+		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
+			return 0;
+		} else if (animator.GetCurrentAnimatorStateInfo(0).IsName("floorAnimation")) {
+			return 1;
+		} else if (animator.GetCurrentAnimatorStateInfo(0).IsName("floorDistroyd")) {
+			return 2;
+		} else if (animator.GetCurrentAnimatorStateInfo(0).IsName("floorHealing")) {
+			return 3;
+		} else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Kill")) {
+			return 4;
+		}
+		return animator.GetInteger ("state");
+	}
 	public void dig() {
-		dugByPlayerInLastSecond = true;
-		digHP --;
-		if (digHP == 0) {
-			digComplete();
-			StopCoroutine("digging");
-			coroutineStarted = false;
-		}
-		if (!coroutineStarted) {
-			coroutineStarted = true;
-			StartCoroutine("digging");
-		}
+		//start dig animation
+		animator.SetInteger ("state", 1);
+		StartCoroutine ("unsetState");
 	}
-	IEnumerator digging() {
-		while (digHP > 0) {
-			dugByPlayerInLastSecond = false;
-			yield return new WaitForSeconds (0.7f);
-			Debug.Log ("dig " + dugByPlayerInLastSecond + digHP); 
-			if (!dugByPlayerInLastSecond) {
-				digHP ++;
-			}
-			if (digHP >= digHPMax) {
-				digState = DigState.NORMAL;
-				coroutineStarted = false;
-				return false;
-			}
+	IEnumerator unsetState() {
+		while(digState() != 4) {
+			yield return new WaitForSeconds (1);
 		}
-	}
-	private void digComplete() {
-		Debug.Log ("dig complete");
-		StopCoroutine ("waitForHealing");
-		digState = DigState.DUG;
-		gameObject.renderer.enabled = false;
-		StartCoroutine ("waitForHealing");
+		gameObject.GetComponentInChildren<FloorKillCollider> ().kill ();
+		animator.SetInteger ("state", 0);
+
 	}
 	public bool fallTrough() {
-		return (digState == DigState.DUG || digState == DigState.HEALING) && !containPeople();
+		return (digState() == 2 || digState() == 3) && !containPeople();
 	}
-	IEnumerator waitForHealing() {
-		yield return new WaitForSeconds(this.waitTime);
-		digState = DigState.HEALING;
-		yield return new WaitForSeconds(this.healTime);
-		digState = DigState.NORMAL;
-		gameObject.renderer.enabled = true;
-		digHP = digHPMax;
-		gameObject.GetComponentInChildren<FloorKillCollider> ().kill ();
-	}
+
 	public bool containPeople () {
 		return GetComponentInChildren<FloorKillCollider> ().goInKillRange.Count > 0;
 	}

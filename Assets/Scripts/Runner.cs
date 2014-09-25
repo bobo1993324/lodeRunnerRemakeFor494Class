@@ -2,8 +2,14 @@
 using System.Collections;
 
 public class Runner : People {
+	enum RunnerState {
+		NORMAL,
+		DIGGING
+	};
+	RunnerState state = RunnerState.NORMAL;
+	GameObject digTarget;
+
 	bool isDead = false;
-	float nextDigTime = 0;
 	new void Update() {
 		if (Input.GetKey (KeyCode.Z)) {
 			Debug.Log("digHoleLeft");
@@ -16,13 +22,14 @@ public class Runner : People {
 				Mathf.RoundToInt(transform.position.y)
 			);
 			if ((goLeftDown != null && goLeftDown.tag == "Floor")
-			    && (goLeft == null || !goLeft.tag.Contains("Floor"))
-			    && Time.time > nextDigTime) {
-				centerX();
-				goLeftDown.GetComponent<Floor>().dig();
-				nextDigTime = Time.time + 0.5f;
-				Debug.Log ("nextDigTime " + nextDigTime); 
+			    && (goLeft == null || !goLeft.tag.Contains("Floor"))) {
+				if (state == RunnerState.NORMAL) {
+					centerX();
+					digTarget = goLeftDown;
+					StartCoroutine("startDig");
+				}
 			}
+			return;
 		} else if (Input.GetKey(KeyCode.X)) {
 			GameObject goRightDown = map.getObjectAt(
 				Mathf.RoundToInt(transform.position.x) + 1,
@@ -33,14 +40,17 @@ public class Runner : People {
 				Mathf.RoundToInt(transform.position.y)
 				);
 			if ((goRightDown != null && goRightDown.tag == "Floor")
-			    && (goRight == null || !goRight.tag.Contains("Floor"))
-			    && Time.time > nextDigTime) {
-				centerX();
-				goRightDown.GetComponent<Floor>().dig();
-				nextDigTime = Time.time + 0.5f;
+			    && (goRight == null || !goRight.tag.Contains("Floor"))) {
+				if (state == RunnerState.NORMAL) {
+					centerX();
+					digTarget = goRightDown;
+					StartCoroutine("startDig");
+				}
 			}
+			return;
 		}
-		base.Update ();
+		if (state == RunnerState.NORMAL) 
+			base.Update ();
 	}
 	public override Vector2 decideMovement() {
 		return new Vector2(Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -63,5 +73,16 @@ public class Runner : People {
 		p.x = Mathf.Round(p.x);
 		transform.position = p;
 	}
-	
+	private IEnumerator startDig() {
+		state = RunnerState.DIGGING;
+		Floor floor = digTarget.GetComponent<Floor>();
+		floor.dig();
+		while (true) {
+			yield return new WaitForSeconds(0.2f);
+			if (floor.digState() != 1) {
+				state = RunnerState.NORMAL;
+				break;
+			}
+		}
+	}
 }
