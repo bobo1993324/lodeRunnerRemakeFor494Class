@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraMovement : MonoBehaviour {
 	GameObject runner;
 	// Update is called once per frame
-	void FixedUpdate() {
+	void Update() {
 		if (runner == null) {
 			runner = GetComponent<GenerateMap>().getPlayer();
 		}

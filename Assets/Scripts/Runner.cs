@@ -11,8 +11,13 @@ public class Runner : People {
 
 	bool isDead = false;
 	new void Update() {
+		if (Input.GetKey (KeyCode.G)) {
+			GameObject[] chaserObjects = GameObject.FindGameObjectsWithTag("Chaser");
+			foreach (GameObject chaser in chaserObjects) {
+				Destroy(chaser);
+			}
+		}
 		if (Input.GetKey (KeyCode.Z)) {
-			Debug.Log("digHoleLeft");
 			GameObject goLeftDown = map.getObjectAt(
 				Mathf.RoundToInt(transform.position.x) - 1,
 				Mathf.RoundToInt(transform.position.y) - 1
@@ -23,8 +28,8 @@ public class Runner : People {
 			);
 			if ((goLeftDown != null && goLeftDown.tag == "Floor")
 			    && (goLeft == null || !goLeft.tag.Contains("Floor"))) {
+				centerX();
 				if (state == RunnerState.NORMAL) {
-					centerX();
 					digTarget = goLeftDown;
 					StartCoroutine("startDig");
 				}
@@ -41,8 +46,9 @@ public class Runner : People {
 				);
 			if ((goRightDown != null && goRightDown.tag == "Floor")
 			    && (goRight == null || !goRight.tag.Contains("Floor"))) {
+
+				centerX();
 				if (state == RunnerState.NORMAL) {
-					centerX();
 					digTarget = goRightDown;
 					StartCoroutine("startDig");
 				}
@@ -53,7 +59,10 @@ public class Runner : People {
 			base.Update ();
 	}
 	public override Vector2 decideMovement() {
-		return new Vector2(Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw("Vertical"));
+		if (Input.GetAxisRaw ("Horizontal") != 0)
+			return new Vector2(Input.GetAxisRaw ("Horizontal"), 0);
+		else
+			return new Vector2(0, Input.GetAxisRaw("Vertical"));
 	}
 	public override void die ()
 	{
@@ -70,7 +79,7 @@ public class Runner : People {
 	}
 	private void centerX() {
 		Vector3 p = transform.position;
-		p.x = Mathf.Round(p.x);
+		p.x += (Mathf.Round(p.x) - p.x)/5;
 		transform.position = p;
 	}
 	private IEnumerator startDig() {
@@ -78,7 +87,7 @@ public class Runner : People {
 		Floor floor = digTarget.GetComponent<Floor>();
 		floor.dig();
 		while (true) {
-			yield return new WaitForSeconds(0.2f);
+			yield return new WaitForSeconds(0.1f);
 			if (floor.digState() != 1) {
 				state = RunnerState.NORMAL;
 				break;
