@@ -50,16 +50,12 @@ public class GenerateMap : MonoBehaviour {
 		return result;
 	}
 	public void respawnEnermy() {
-		while (true) {
-			int targetY = height - 1;
-			int targetX = rand.Next (1, width - 1);
-			if (gameObjectMatrix[targetX, targetY] == null) {
-				Instantiate(chaserPrefab,
+		int targetY = height;
+		int targetX = rand.Next (1, width - 1);
+		GameObject go = Instantiate(chaserPrefab,
 				            new Vector2(targetX, targetY),
-				            Quaternion.identity);
-				return;
-			}
-		}
+				            Quaternion.identity) as GameObject;
+		go.GetComponent<Chaser> ().disableFor1Second ();
 	}
 	// Use this for initialization
 	void Start () {

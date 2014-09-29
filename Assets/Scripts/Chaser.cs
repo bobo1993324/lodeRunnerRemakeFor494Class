@@ -11,12 +11,13 @@ public class Chaser : People {
 	public int goldCount = 0;
 	private System.Random rand = new System.Random();
 	public bool inPit = false;
+	public bool respawning = false;
 	new void Start() {
 		base.Start ();
 		StartCoroutine ("dropGoldRandomly");
 	}
 	new void Update() {
-		if(!inPit) {
+		if(!inPit && !respawning) {
 			base.Update();
 		}
 	}
@@ -188,5 +189,14 @@ public class Chaser : People {
 		} else {
 			return goLeft();
 		}
+	}
+	public void disableFor1Second() {
+		StartCoroutine ("disableFor1SecondCotin");
+	}
+	IEnumerator disableFor1SecondCotin() {
+		respawning = true;
+		yield return new WaitForSeconds (1);
+		respawning = false;
+
 	}
 }
