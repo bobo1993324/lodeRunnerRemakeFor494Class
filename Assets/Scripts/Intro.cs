@@ -2,13 +2,13 @@
 using System.Collections;
 
 public class Intro : MonoBehaviour {
-	public Texture t;
 	void Start() {
-		gameObject.camera.pixelRect = new Rect (0, 0, 640, 480);
+		PlayerPrefs.SetInt ("life", 5);
+		PlayerPrefs.SetString ("currentLevel", "1");
 	}
 	void Update() {
-		if (Input.GetKey (KeyCode.X) || Input.GetKey (KeyCode.Z)) {
-			Application.LoadLevel("Level1");
+		if (Input.GetKey (KeyCode.S)) {
+			Application.LoadLevel("ShowLifeAtStart");
 		}
 	}
 }

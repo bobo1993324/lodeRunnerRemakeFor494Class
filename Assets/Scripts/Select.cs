@@ -20,7 +20,8 @@ public class Select : MonoBehaviour {
 			selectText.text = "Select Level " + level [selectedIndex];
 		}
 		if (Input.GetKeyDown(KeyCode.S)) {
-			Application.LoadLevel ("Level" + level [selectedIndex]);
+			PlayerPrefs.SetString("currentLevel", level [selectedIndex]);
+			Application.LoadLevel ("Level1");
 		}
 	}
 }
