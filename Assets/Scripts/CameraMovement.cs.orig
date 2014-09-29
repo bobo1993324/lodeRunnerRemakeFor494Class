@@ -1,0 +1,105 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class CameraMovement : MonoBehaviour {
+	public AudioSource inGameSound;
+	GameObject runner;
+	public int pixelWidth;
+	public int pixelHeight;
+	public float previewSpeed = 1f;
+	public float boundingWidth = 9f;
+	GenerateMap map;
+	// Update is called once per frame
+<<<<<<< HEAD
+	public float XRightRange;
+	public float XLeftRange;
+	public float YTopRange;
+	public float YBottonRange;
+	public float StartX;
+	public float StartY;
+	public float CameraFollowDistance;
+	void Start() {
+		Vector3 pos = new Vector3 (StartX, StartY, transform.position.z);
+		transform.position = pos;
+	}
+
+	void Update() {
+		if (runner == null) {
+			runner = GetComponent<GenerateMap>().getPlayer();
+		}
+		if (runner != null) {
+			Vector3 pos = transform.position;
+			Vector3 runnerPos = runner.transform.position;
+			if ( runnerPos.x <= XRightRange && runnerPos.x >= XLeftRange ){
+				if (Mathf.Abs(pos.x - runnerPos.x) >= CameraFollowDistance) {
+					if (runnerPos.x > pos.x) {
+						pos.x = runnerPos.x - CameraFollowDistance;
+					}else if (runnerPos.x < pos.x){
+						pos.x = runnerPos.x + CameraFollowDistance;
+					}
+				}
+			}
+			if ( runnerPos.y <= YTopRange && runnerPos.y >= YBottonRange ){
+				pos.y = runnerPos.y;
+			}
+			transform.position = pos;
+=======
+	public int state = 0; //0 for get ready, 1 : game play
+	int animateState = 0;//0: center, 1: go left, 2: go right
+	void Start() {
+	}
+	void Update() {
+		if (state == 0) { // Get ready
+			if (map == null) {
+				map = GetComponent<GenerateMap>();
+			}
+			if (map != null) {
+				Vector3 position;
+				switch (animateState) {
+				case 0: 
+					animateState = 1;
+					break;
+				case 1:
+					position = transform.position;
+					position.x += previewSpeed * Time.deltaTime;
+					transform.position = position;
+					if (position.x > map.width - 8.5f) {
+						animateState = 2;
+					}
+					break;
+				case 2:
+					position = transform.position;
+					position.x -= previewSpeed * Time.deltaTime;
+					transform.position = position;
+					if (position.x < 7.5f) {
+						state = 1;
+						inGameSound.Play();
+					}
+					break;
+				}
+			}
+		}
+		if (state == 1) {
+			if (runner == null) {
+				runner = GetComponent<GenerateMap>().getPlayer();
+			}
+			if (runner != null) {
+				Vector3 pos = transform.position;
+				if (pos.x < runner.transform.position.x - boundingWidth / 2 ) {
+					pos.x = runner.transform.position.x - boundingWidth / 2;
+				}
+				if (pos.x > runner.transform.position.x + boundingWidth / 2) {
+					pos.x = runner.transform.position.x + boundingWidth / 2;
+				}
+				if (pos.x < 7.5f) {
+					pos.x = 7.5f;
+				}
+				if (pos.x > map.width - 8.5f) {
+					pos.x = map.width - 8.5f;
+				}
+				transform.position = pos;
+			}
+>>>>>>> 8c9aa150e5c998574d6a71ed127a48a6becb62e7
+		}
+	}
+}

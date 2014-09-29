@@ -24,9 +24,6 @@ public abstract class People : MonoBehaviour {
 		if (floors.Count > 1) {
 			return true;
 		}
-		if (floors.Count == 1  && floors[0].GetComponent<Floor>() != null )
-			Debug.Log (floors[0].GetComponent<Floor>().fallTrough() 
-			           + " " + floors[0].GetComponent<Floor>().containPeople(gameObject));
 		if (floors.Count == 1 && floors[0].GetComponent<Floor>() != null 
 		    && !floors[0].GetComponent<Floor>().fallTrough()
 		    && !floors[0].GetComponent<Floor>().containPeople(gameObject)) {
@@ -67,7 +64,7 @@ public abstract class People : MonoBehaviour {
 
 		//TODO disable  falling at start when the maps is still in construction
 		if (!onFloor() && onLadderCount + onLadderDownCount == 0 
-		    && !onStick()) {
+		    && !onStick() ) {
 			//falling
 			Vector3 previousPosition = transform.position;
 			previousPosition.y -= fallspeed * Time.deltaTime;
@@ -88,7 +85,7 @@ public abstract class People : MonoBehaviour {
 		if ((verticalMoveDistance < 0 && onLadderDownCount > 0 && !onFloor ())
 		    || (verticalMoveDistance > 0 && onLadderCenterCount > 0)) {
 			Vector3 previousPosition = transform.position;
-			previousPosition.x = Mathf.Round(previousPosition.x);
+			previousPosition.x += (Mathf.Round(previousPosition.x) -previousPosition.x ) / 3;
 			previousPosition.y += verticalMoveDistance;
 			transform.position = previousPosition;
 		} else if (verticalMoveDistance < 0 && onStick() && !onFloor()) {
@@ -100,13 +97,13 @@ public abstract class People : MonoBehaviour {
 	
 	void adjustHorizontalPosition() {
 		Vector3 previousPosition = transform.position;
-		previousPosition.x = Mathf.Round(previousPosition.x);
+		previousPosition.x += (Mathf.Round(previousPosition.x) - previousPosition.x) / 3;
 		transform.position = previousPosition;
 	}
 	
 	void adjustVerticalPosition() {
 		Vector3 previousPosition = transform.position;
-		previousPosition.y = Mathf.Round(previousPosition.y);
+		previousPosition.y += (Mathf.Round(previousPosition.y) - previousPosition.y) / 3;
 		transform.position = previousPosition;
 	}
 	public void addFloor(GameObject go) {

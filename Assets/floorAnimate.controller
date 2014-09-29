@@ -132,7 +132,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: floorAnimation
-  m_Speed: 1
+  m_Speed: 3
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400000, guid: e0b138457828ba446b5c7bf6f63952c3, type: 2}
@@ -162,7 +162,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: floorHealing
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400000, guid: 15540b84fbc34cf4680dfb1befb42203, type: 2}
@@ -177,7 +177,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: floorDistroyd
-  m_Speed: 1
+  m_Speed: .699999988
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400000, guid: 2b3f94d32e96d3946aac9ef242bdcebd, type: 2}
@@ -219,18 +219,6 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110200107}
-      second:
-      - {fileID: 110129818}
-    data:
-      first: {fileID: 110247655}
-      second:
-      - {fileID: 110184786}
-    data:
-      first: {fileID: 110281047}
-      second:
-      - {fileID: 110103001}
-    data:
       first: {fileID: 0}
       second: []
     data:
@@ -242,11 +230,17 @@ StateMachine:
       second:
       - {fileID: 110117215}
     data:
-      first: {fileID: 0}
-      second: []
+      first: {fileID: 110281047}
+      second:
+      - {fileID: 110103001}
     data:
-      first: {fileID: 0}
-      second: []
+      first: {fileID: 110247655}
+      second:
+      - {fileID: 110184786}
+    data:
+      first: {fileID: 110200107}
+      second:
+      - {fileID: 110129818}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: -204, y: -120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

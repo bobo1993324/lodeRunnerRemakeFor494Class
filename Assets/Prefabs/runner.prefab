@@ -418,7 +418,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: .400000006, y: .800000012}
+  m_Size: {x: .400000006, y: .0500000007}
   m_Center: {x: .300000012, y: 0}
 --- !u!61 &6100004
 BoxCollider2D:
@@ -429,7 +429,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: .800000012, y: .400000006}
+  m_Size: {x: .100000001, y: .400000006}
   m_Center: {x: 0, y: -.300000012}
 --- !u!61 &6100006
 BoxCollider2D:
@@ -440,7 +440,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: .400000006, y: .800000012}
+  m_Size: {x: .400000006, y: .0500000007}
   m_Center: {x: -.300000012, y: 0}
 --- !u!61 &6100008
 BoxCollider2D:
@@ -451,7 +451,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: .300000012, y: 1}
+  m_Size: {x: .600000024, y: 1}
   m_Center: {x: 0, y: -.100000001}
 --- !u!61 &6100010
 BoxCollider2D:
@@ -462,7 +462,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: .300000012, y: .899999976}
+  m_Size: {x: .600000024, y: .949999988}
   m_Center: {x: 0, y: 0}
 --- !u!61 &6100012
 BoxCollider2D:
@@ -473,7 +473,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: .800000012, y: .800000012}
+  m_Size: {x: .0500000007, y: .980000019}
   m_Center: {x: 0, y: 0}
 --- !u!61 &6100014
 BoxCollider2D:
@@ -518,6 +518,7 @@ MonoBehaviour:
   onLadderCount: 0
   onStickCount: 0
   floors: []
+  dieSound: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

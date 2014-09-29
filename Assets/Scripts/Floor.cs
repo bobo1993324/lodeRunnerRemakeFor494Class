@@ -22,12 +22,13 @@ public class Floor : MonoBehaviour {
 	}
 	public void dig() {
 		//start dig animation
+		StopCoroutine ("unsetState");
 		animator.SetInteger ("state", 1);
 		StartCoroutine ("unsetState");
 	}
 	IEnumerator unsetState() {
 		while(digState() != 4) {
-			yield return new WaitForSeconds (1);
+			yield return new WaitForSeconds (0.3f);
 		}
 		gameObject.GetComponentInChildren<FloorKillCollider> ().kill ();
 		animator.SetInteger ("state", 0);
