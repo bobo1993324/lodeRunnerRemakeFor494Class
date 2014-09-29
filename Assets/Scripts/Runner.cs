@@ -83,7 +83,7 @@ public class Runner : People {
 		if (life > 0)
 			Application.LoadLevel ("ShowLifeAtStart");
 		else 
-			Application.LoadLevel ("Intro");
+			Application.LoadLevel ("GameOver");
 	}
 	private void centerX() {
 		Vector3 p = transform.position;

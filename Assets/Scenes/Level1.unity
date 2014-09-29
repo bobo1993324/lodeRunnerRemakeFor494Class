@@ -436,7 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ad30963044ad54ea0236c2f640a001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapName: Level1
+  mapName: custom
   floorPrefab: {fileID: 100000, guid: 9418a4300df080840bd3e08211e48c88, type: 2}
   goldPrefab: {fileID: 100000, guid: 7e9c8fd5b69da10429a82a3553c68ab2, type: 2}
   hardFloorPrefab: {fileID: 100000, guid: 9067c47f8e9bd7d4d9d5f9251dfc901e, type: 2}

@@ -508,8 +508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0c5c882f449a74fa7f3e3d802a9afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 3.5
-  climbSpeed: 4
+  runSpeed: 3
+  climbSpeed: 3
   fallspeed: 4
   wallOnRightCount: 0
   wallOnLeftCount: 0
