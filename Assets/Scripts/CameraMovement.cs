@@ -17,6 +17,11 @@ public class CameraMovement : MonoBehaviour {
 				map = GetComponent<GenerateMap>();
 			}
 			if (map != null) {
+				if (map.mapName == "custom"){
+					state = 1;
+					inGameSound.Play();
+					return;
+				}
 				Vector3 position;
 				switch (animateState) {
 				case 0: 
