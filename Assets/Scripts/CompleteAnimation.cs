@@ -31,9 +31,8 @@ public class CompleteAnimation : MonoBehaviour {
 	}
 
 	IEnumerator switchScene() {
-		yield return new WaitForSeconds (2);
-		Application.LoadLevel ("Select");
-		animationDone = false;
+		yield return new WaitForSeconds (4);
+		LevelStore.loadNextLevel ();
 	}
 
 	IEnumerator flipRunner() {
