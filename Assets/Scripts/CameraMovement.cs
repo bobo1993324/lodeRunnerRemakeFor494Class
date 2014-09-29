@@ -60,6 +60,7 @@ public class CameraMovement : MonoBehaviour {
 				if (pos.x > map.width - 11.5f) {
 					pos.x = map.width - 11.5f;
 				}
+				pos.y = runner.transform.position.y;
 				transform.position = pos;
 			}
 		}
