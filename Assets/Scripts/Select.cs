@@ -7,7 +7,7 @@ public class Select : MonoBehaviour {
 	int selectedIndex = 0;
 	// Use this for initialization
 	void Start () {
-		selectText.text = "Select " + level [selectedIndex];
+		selectText.text = "Select Level " + level [selectedIndex];
 	}
 	
 	// Update is called once per frame
@@ -17,7 +17,7 @@ public class Select : MonoBehaviour {
 			if (selectedIndex >= level.GetLength(0)) {
 				selectedIndex = 0;
 			}
-			selectText.text = "Select " + level [selectedIndex];
+			selectText.text = "Select Level " + level [selectedIndex];
 		}
 		if (Input.GetKeyDown(KeyCode.S)) {
 			Application.LoadLevel ("Level" + level [selectedIndex]);

@@ -18,6 +18,12 @@ public class Runner : People {
 		if (isDead) {
 			return;
 		}
+		if (Input.GetKey (KeyCode.G)) {
+			GameObject[] chaserObjects = GameObject.FindGameObjectsWithTag("Chaser");
+			foreach (GameObject chaser in chaserObjects) {
+				Destroy(chaser);
+			}
+		}
 		if (Input.GetKey (KeyCode.Z)) {
 			Debug.Log("digHoleLeft");
 			GameObject goLeftDown = map.getObjectAt(
