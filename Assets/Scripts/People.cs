@@ -86,7 +86,7 @@ public abstract class People : MonoBehaviour {
 		}
 		
 		float verticalMoveDistance = movement.y * climbSpeed * Time.deltaTime;
-		if ((verticalMoveDistance < 0 && onLadderDownCount > 0 && !onFloor ())
+		if ((verticalMoveDistance < 0 && (onLadderDownCount > 0 || !onFloor ()))
 		    || (verticalMoveDistance > 0 && onLadderCenterCount > 0)) {
 			Vector3 previousPosition = transform.position;
 			previousPosition.x += (Mathf.Round(previousPosition.x) -previousPosition.x ) / 3;
