@@ -24,6 +24,7 @@ public class GenerateMap : MonoBehaviour {
 	public GameObject chaserPrefab;
 	public GameObject hiddenLadderPrefab;
 	public GameObject arrowPrefab;
+	public GameObject completeLevelObject;
 	public int width;
 	public int height;
 
@@ -79,10 +80,13 @@ public class GenerateMap : MonoBehaviour {
 			mapName = currentMap;
 			Debug.Log("read map from pref " + currentMap);
 		}
-		if(mapName == "1")
+		if(mapName == "1") {
 			xmlDoc.LoadXml (new MapLevel1().xml);
+			completeLevelObject.transform.position = new Vector3(25, 16, 0);
+		}
 		if(mapName == "custom") {
 			xmlDoc.LoadXml (new MapCustom().xml);
+			completeLevelObject.transform.position = new Vector3(37, 30, 0);
 		}
         //xmlDoc.Load ("./Assets/Maps/Level2.tmx");
 		XmlNodeList tilesetList = xmlDoc.GetElementsByTagName ("tileset");
