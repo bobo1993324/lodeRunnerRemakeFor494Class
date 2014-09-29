@@ -2,22 +2,24 @@
 using System.Collections;
 
 public class Runner : People {
+	public AudioSource dieSound;
 	enum RunnerState {
 		NORMAL,
 		DIGGING
 	};
 	RunnerState state = RunnerState.NORMAL;
 	GameObject digTarget;
-
+	void Start() {
+		base.Start ();
+		dieSound = Camera.main.GetComponent<SoundStore> ().dieSound;
+	}
 	bool isDead = false;
 	new void Update() {
-		if (Input.GetKey (KeyCode.G)) {
-			GameObject[] chaserObjects = GameObject.FindGameObjectsWithTag("Chaser");
-			foreach (GameObject chaser in chaserObjects) {
-				Destroy(chaser);
-			}
+		if (isDead) {
+			return;
 		}
 		if (Input.GetKey (KeyCode.Z)) {
+			Debug.Log("digHoleLeft");
 			GameObject goLeftDown = map.getObjectAt(
 				Mathf.RoundToInt(transform.position.x) - 1,
 				Mathf.RoundToInt(transform.position.y) - 1
@@ -69,11 +71,12 @@ public class Runner : People {
 		if (!isDead) {
 			isDead = true;
 			gameObject.renderer.enabled = false;
+			dieSound.Play();
 			StartCoroutine ("reloadLevelIn1Second");
 		}
 	}
 	IEnumerator reloadLevelIn1Second() {
-		yield return new WaitForSeconds (1);
+		yield return new WaitForSeconds (3);
 		Application.LoadLevel (Application.loadedLevel);
 		Destroy (gameObject);
 	}

@@ -2,14 +2,12 @@
 using System.Collections;
 
 public class Intro : MonoBehaviour {
-
-	void OnGUI() {
-		GUI.Label(new Rect(100, 100, 300, 40), "Load Runner");
-		GUI.Label(new Rect(100, 140, 300, 40), 
-		          @"Controls: arrows for moving up and down.\n
-key z and key x digs holes. R for restart level
-");
-		if (GUI.Button(new Rect(200, 200, 100, 50), "Level 1")) {
+	public Texture t;
+	void Start() {
+		gameObject.camera.pixelRect = new Rect (0, 0, 640, 480);
+	}
+	void Update() {
+		if (Input.GetKey (KeyCode.X) || Input.GetKey (KeyCode.Z)) {
 			Application.LoadLevel("Level1");
 		}
 	}
