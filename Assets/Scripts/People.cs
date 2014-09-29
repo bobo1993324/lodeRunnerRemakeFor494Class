@@ -86,17 +86,17 @@ public abstract class People : MonoBehaviour {
 		}
 		
 		float verticalMoveDistance = movement.y * climbSpeed * Time.deltaTime;
-		if ((verticalMoveDistance < 0 && onLadderDownCount > 0 && !onFloor ())
+		if (verticalMoveDistance < 0 && onStick() && !onFloor()) {
+			Vector3 previousPosition = transform.position;
+			previousPosition.y -= 0.3f;
+			transform.position = previousPosition;
+		} else if ((verticalMoveDistance < 0 && (onLadderDownCount > 0 || !onFloor ()))
 		    || (verticalMoveDistance > 0 && onLadderCenterCount > 0)) {
 			Vector3 previousPosition = transform.position;
 			previousPosition.x += (Mathf.Round(previousPosition.x) -previousPosition.x ) / 3;
 			previousPosition.y += verticalMoveDistance;
 			transform.position = previousPosition;
-		} else if (verticalMoveDistance < 0 && onStick() && !onFloor()) {
-			Vector3 previousPosition = transform.position;
-			previousPosition.y -= 0.3f;
-			transform.position = previousPosition;
-		}
+		} 
 	}
 	
 	void adjustHorizontalPosition() {

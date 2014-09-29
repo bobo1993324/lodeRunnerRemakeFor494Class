@@ -84,7 +84,7 @@ public class GenerateMap : MonoBehaviour {
 		if(mapName == "custom") {
 			xmlDoc.LoadXml (new MapCustom().xml);
 		}
-//		xmlDoc.Load ("./Assets/Maps/Level1.tmx");
+        //xmlDoc.Load ("./Assets/Maps/Level2.tmx");
 		XmlNodeList tilesetList = xmlDoc.GetElementsByTagName ("tileset");
 		Dictionary<string, string> tileMap = new Dictionary<string, string>();
 		foreach (XmlNode tileset in tilesetList) {
@@ -243,7 +243,7 @@ public class GenerateMap : MonoBehaviour {
 		// visualize
 
 //		int playerX = 6;
-//		int playerY = 10;
+//		int playerY = 3;
 //		for (int i = 0; i < width; i++) {
 //			for (int j = 0; j < height; j++) {
 //				int key = chaseDirectionKey(playerX, playerY, i, j);
