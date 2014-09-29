@@ -52,6 +52,9 @@ public abstract class People : MonoBehaviour {
 	
 	// Update is called once per frame
 	protected void Update () {
+		if (Camera.main.GetComponent<CameraMovement>().state == 0) {
+			return;
+		};
 		if (updateDisabled) {
 			return;
 		}
