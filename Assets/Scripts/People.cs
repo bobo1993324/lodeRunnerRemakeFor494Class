@@ -59,7 +59,10 @@ public abstract class People : MonoBehaviour {
 		if (onStick() || onFloor()) {
 			adjustVerticalPosition();
 		}
-		if (hasWallOnLeft () || hasWallOnRight ()) {
+		if (hasWallOnLeft () && transform.position.x < Mathf.Round(transform.position.x)) {
+			adjustHorizontalPosition();
+		}
+		if (hasWallOnRight () && transform.position.x > Mathf.Round(transform.position.x)) {
 			adjustHorizontalPosition();
 		}
 
