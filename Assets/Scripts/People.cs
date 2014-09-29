@@ -21,7 +21,7 @@ public abstract class People : MonoBehaviour {
 	protected void Start() {
 		map = Camera.main.GetComponent<GenerateMap> ();
 	}
-	bool onFloor() {
+	protected bool onFloor() {
 		if (floors.Count > 1) {
 			return true;
 		}
