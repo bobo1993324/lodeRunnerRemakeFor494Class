@@ -77,8 +77,13 @@ public class Runner : People {
 	}
 	IEnumerator reloadLevelIn1Second() {
 		yield return new WaitForSeconds (3);
-		Application.LoadLevel (Application.loadedLevel);
-		Destroy (gameObject);
+		int life = PlayerPrefs.GetInt ("life");
+		life --;
+		PlayerPrefs.SetInt ("life", life);
+		if (life > 0)
+			Application.LoadLevel ("ShowLifeAtStart");
+		else 
+			Application.LoadLevel ("Intro");
 	}
 	private void centerX() {
 		Vector3 p = transform.position;

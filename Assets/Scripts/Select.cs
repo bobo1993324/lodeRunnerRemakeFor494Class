@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Select : MonoBehaviour {
 	public GUIText selectText;
-	string[] level = {"1", "Custom"};
+	string[] level = {"1", "custom"};
 	int selectedIndex = 0;
 	// Use this for initialization
 	void Start () {
@@ -20,7 +20,7 @@ public class Select : MonoBehaviour {
 			selectText.text = "Select " + level [selectedIndex];
 		}
 		if (Input.GetKeyDown(KeyCode.S)) {
-			PlayerPrefs.SetString("currentLevel", "Level" +  level [selectedIndex]);
+			PlayerPrefs.SetString("currentLevel", level [selectedIndex]);
 			Application.LoadLevel ("Level1");
 		}
 	}

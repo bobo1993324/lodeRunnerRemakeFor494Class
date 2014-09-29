@@ -83,9 +83,9 @@ public class GenerateMap : MonoBehaviour {
 			mapName = currentMap;
 			Debug.Log("read map from pref " + currentMap);
 		}
-		if(mapName == "Level1")
+		if(mapName == "1")
 			xmlDoc.LoadXml (new MapLevel1().xml);
-		if(mapName == "LevelCustom") {
+		if(mapName == "custom") {
 			xmlDoc.LoadXml (new MapCustom().xml);
 		}
 //		xmlDoc.Load ("./Assets/Maps/Level1.tmx");
