@@ -24,44 +24,46 @@ public class Runner : People {
 				Destroy(chaser);
 			}
 		}
-		if (Input.GetKey (KeyCode.Z)) {
-			Debug.Log("digHoleLeft");
-			GameObject goLeftDown = map.getObjectAt(
-				Mathf.RoundToInt(transform.position.x) - 1,
-				Mathf.RoundToInt(transform.position.y) - 1
-			);
-			GameObject goLeft = map.getObjectAt(
-				Mathf.RoundToInt(transform.position.x) - 1,
-				Mathf.RoundToInt(transform.position.y)
-			);
-			if ((goLeftDown != null && goLeftDown.tag == "Floor")
-			    && (goLeft == null || !goLeft.tag.Contains("Floor"))) {
-				centerX();
-				if (state == RunnerState.NORMAL) {
-					digTarget = goLeftDown;
-					StartCoroutine("startDig");
+		if (!isFalling) {
+			if (Input.GetKey (KeyCode.Z)) {
+				Debug.Log("digHoleLeft");
+				GameObject goLeftDown = map.getObjectAt(
+					Mathf.RoundToInt(transform.position.x) - 1,
+					Mathf.RoundToInt(transform.position.y) - 1
+				);
+				GameObject goLeft = map.getObjectAt(
+					Mathf.RoundToInt(transform.position.x) - 1,
+					Mathf.RoundToInt(transform.position.y)
+				);
+				if ((goLeftDown != null && goLeftDown.tag == "Floor")
+				    && (goLeft == null || !goLeft.tag.Contains("Floor"))) {
+					centerX();
+					if (state == RunnerState.NORMAL) {
+						digTarget = goLeftDown;
+						StartCoroutine("startDig");
+					}
 				}
-			}
-			return;
-		} else if (Input.GetKey(KeyCode.X)) {
-			GameObject goRightDown = map.getObjectAt(
-				Mathf.RoundToInt(transform.position.x) + 1,
-				Mathf.RoundToInt(transform.position.y) - 1
-				);
-			GameObject goRight = map.getObjectAt(
-				Mathf.RoundToInt(transform.position.x) + 1,
-				Mathf.RoundToInt(transform.position.y)
-				);
-			if ((goRightDown != null && goRightDown.tag == "Floor")
-			    && (goRight == null || !goRight.tag.Contains("Floor"))) {
+				return;
+			} else if (Input.GetKey(KeyCode.X)) {
+				GameObject goRightDown = map.getObjectAt(
+					Mathf.RoundToInt(transform.position.x) + 1,
+					Mathf.RoundToInt(transform.position.y) - 1
+					);
+				GameObject goRight = map.getObjectAt(
+					Mathf.RoundToInt(transform.position.x) + 1,
+					Mathf.RoundToInt(transform.position.y)
+					);
+				if ((goRightDown != null && goRightDown.tag == "Floor")
+				    && (goRight == null || !goRight.tag.Contains("Floor"))) {
 
-				centerX();
-				if (state == RunnerState.NORMAL) {
-					digTarget = goRightDown;
-					StartCoroutine("startDig");
+					centerX();
+					if (state == RunnerState.NORMAL) {
+						digTarget = goRightDown;
+						StartCoroutine("startDig");
+					}
 				}
+				return;
 			}
-			return;
 		}
 		if (state == RunnerState.NORMAL) 
 			base.Update ();

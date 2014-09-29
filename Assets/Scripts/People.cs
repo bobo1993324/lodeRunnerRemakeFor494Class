@@ -17,6 +17,7 @@ public abstract class People : MonoBehaviour {
 	public List<GameObject> floors = new List<GameObject> ();
 	protected GenerateMap map;
 	protected bool updateDisabled = false;
+	protected bool isFalling = false;
 	protected void Start() {
 		map = Camera.main.GetComponent<GenerateMap> ();
 	}
@@ -69,7 +70,10 @@ public abstract class People : MonoBehaviour {
 			Vector3 previousPosition = transform.position;
 			previousPosition.y -= fallspeed * Time.deltaTime;
 			transform.position = previousPosition;
+			isFalling = true;
 			return;
+		} else {
+			isFalling = false;
 		}
 		Vector2 movement = decideMovement ();
 		float horizontalMoveDistance = movement.x * runSpeed * Time.deltaTime;
