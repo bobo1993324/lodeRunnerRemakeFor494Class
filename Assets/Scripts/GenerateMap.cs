@@ -78,8 +78,16 @@ public class GenerateMap : MonoBehaviour {
 
 	private void loadMap() {
 		XmlDocument xmlDoc = new XmlDocument ();
+		string currentMap = PlayerPrefs.GetString ("currentLevel");
+		if (currentMap != null && currentMap != "") {
+			mapName = currentMap;
+			Debug.Log("read map from pref " + currentMap);
+		}
 		if(mapName == "Level1")
 			xmlDoc.LoadXml (new MapLevel1().xml);
+		if(mapName == "LevelCustom") {
+			xmlDoc.LoadXml (new MapCustom().xml);
+		}
 //		xmlDoc.Load ("./Assets/Maps/Level1.tmx");
 		XmlNodeList tilesetList = xmlDoc.GetElementsByTagName ("tileset");
 		Dictionary<string, string> tileMap = new Dictionary<string, string>();
