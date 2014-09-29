@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class GoldCollector : MonoBehaviour {
+	public AudioSource allGoldFoundSound;
 	public int collectedGold = 0;
 	public int totalGold = 0;
 
@@ -12,7 +13,7 @@ public class GoldCollector : MonoBehaviour {
 			foreach (GameObject hiddenLadder in hiddenLadders) {
 				hiddenLadder.GetComponent<HiddenLadder>().show();
 			}
-			Debug.Log("Hide");
+			allGoldFoundSound.Play();
 		}
 	}
 	public void addGoldToCollect() {

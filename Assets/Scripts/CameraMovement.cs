@@ -4,12 +4,9 @@ using System.Collections;
 public class CameraMovement : MonoBehaviour {
 	public AudioSource inGameSound;
 	GameObject runner;
-	public int pixelWidth;
-	public int pixelHeight;
 	public float previewSpeed = 1f;
 	public float boundingWidth = 9f;
 	GenerateMap map;
-	// Update is called once per frame
 	public int state = 0; //0 for get ready, 1 : game play
 	int animateState = 0;//0: center, 1: go left, 2: go right
 	void Start() {
@@ -29,7 +26,7 @@ public class CameraMovement : MonoBehaviour {
 					position = transform.position;
 					position.x += previewSpeed * Time.deltaTime;
 					transform.position = position;
-					if (position.x > map.width - 8.5f) {
+					if (position.x > map.width - 11.5f) {
 						animateState = 2;
 					}
 					break;
@@ -37,7 +34,7 @@ public class CameraMovement : MonoBehaviour {
 					position = transform.position;
 					position.x -= previewSpeed * Time.deltaTime;
 					transform.position = position;
-					if (position.x < 7.5f) {
+					if (position.x < 10.5f) {
 						state = 1;
 						inGameSound.Play();
 					}
@@ -57,11 +54,11 @@ public class CameraMovement : MonoBehaviour {
 				if (pos.x > runner.transform.position.x + boundingWidth / 2) {
 					pos.x = runner.transform.position.x + boundingWidth / 2;
 				}
-				if (pos.x < 7.5f) {
-					pos.x = 7.5f;
+				if (pos.x < 10.5f) {
+					pos.x = 10.5f;
 				}
-				if (pos.x > map.width - 8.5f) {
-					pos.x = map.width - 8.5f;
+				if (pos.x > map.width - 11.5f) {
+					pos.x = map.width - 11.5f;
 				}
 				transform.position = pos;
 			}

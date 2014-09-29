@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MapLevel1 : MonoBehaviour {
+public class MapLevel1 {
 	public string xml = @"<?xml version=""1.0"" encoding=""UTF-8""?> 
 <map version=""1.0"" orientation=""orthogonal"" width=""27"" height=""16"" tilewidth=""32"" tileheight=""32"">
  <tileset firstgid=""1"" name=""floor"" tilewidth=""32"" tileheight=""32"">
