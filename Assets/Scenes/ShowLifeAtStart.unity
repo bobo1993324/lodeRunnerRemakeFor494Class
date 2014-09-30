@@ -99,12 +99,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 266060928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2e2cb206d57d50419679f2050e798e2, type: 3}
+  m_Script: {fileID: 11500000, guid: aa59ec24807201745a8065dbd3e7344d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textt: {fileID: 266060930}
-  testCurrentLevel: 1
-  testLife: 5
+  testCurrentLevel: 
+  testLife: 0
 --- !u!132 &266060930
 GUIText:
   m_ObjectHideFlags: 0

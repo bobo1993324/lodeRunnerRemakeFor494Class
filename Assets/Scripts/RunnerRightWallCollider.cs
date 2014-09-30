@@ -8,13 +8,16 @@ public class RunnerRightWallCollider : MonoBehaviour {
 	}
 	void OnTriggerEnter2D(Collider2D coll) {
 		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor") {
-			people.wallOnRightCount ++;
+			if (people != null) {
+				people.wallOnRightCount ++;
+			}
 		}
 	}
 	
 	void OnTriggerExit2D(Collider2D coll) {
 		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor") {
-			people.wallOnRightCount --;
+			if (people != null)
+				people.wallOnRightCount --;
 		}
 	}
 }
