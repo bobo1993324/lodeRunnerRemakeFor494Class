@@ -25,40 +25,37 @@ public class Runner : People {
 			}
 		}
 		if (!isFalling) {
-			if (Input.GetKey (KeyCode.Z)) {
-				Debug.Log("digHoleLeft");
-				GameObject goLeftDown = map.getObjectAt(
-					Mathf.RoundToInt(transform.position.x) - 1,
-					Mathf.RoundToInt(transform.position.y) - 1
-				);
-				GameObject goLeft = map.getObjectAt(
-					Mathf.RoundToInt(transform.position.x) - 1,
-					Mathf.RoundToInt(transform.position.y)
-				);
-				if ((goLeftDown != null && goLeftDown.tag == "Floor")
-				    && (goLeft == null || !goLeft.tag.Contains("Floor"))) {
-					centerX();
-					if (state == RunnerState.NORMAL) {
-						digTarget = goLeftDown;
-						StartCoroutine("startDig");
-					}
+			if (Input.GetKey (KeyCode.Z) || Input.GetKey(KeyCode.X)) {
+				GameObject front;
+				if (Input.GetKey(KeyCode.Z)) {
+					digTarget = map.getObjectAt(
+						Mathf.RoundToInt(transform.position.x) - 1,
+						Mathf.RoundToInt(transform.position.y) - 1
+						);
+					front = map.getObjectAt(
+						Mathf.RoundToInt(transform.position.x) - 1,
+						Mathf.RoundToInt(transform.position.y));
+				} else {
+					digTarget = map.getObjectAt(
+						Mathf.RoundToInt(transform.position.x) + 1,
+						Mathf.RoundToInt(transform.position.y) - 1
+						);
+					front = map.getObjectAt(
+						Mathf.RoundToInt(transform.position.x) + 1,
+						Mathf.RoundToInt(transform.position.y)
+						);
 				}
-				return;
-			} else if (Input.GetKey(KeyCode.X)) {
-				GameObject goRightDown = map.getObjectAt(
-					Mathf.RoundToInt(transform.position.x) + 1,
-					Mathf.RoundToInt(transform.position.y) - 1
-					);
-				GameObject goRight = map.getObjectAt(
-					Mathf.RoundToInt(transform.position.x) + 1,
-					Mathf.RoundToInt(transform.position.y)
-					);
-				if ((goRightDown != null && goRightDown.tag == "Floor")
-				    && (goRight == null || !goRight.tag.Contains("Floor"))) {
-
+				if (
+					(digTarget != null && digTarget.tag == "Floor")
+					&& (front == null 
+				    	|| (front.tag != "HardFloor" 
+				    		&& (front.tag != "Floor" || front.GetComponent<Floor>().digState() != 0)
+				    		)
+				    	)
+					) {
+					Debug.Log ("dig confirm");
 					centerX();
 					if (state == RunnerState.NORMAL) {
-						digTarget = goRightDown;
 						StartCoroutine("startDig");
 					}
 				}

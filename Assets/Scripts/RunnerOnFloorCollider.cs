@@ -9,15 +9,17 @@ public class RunnerOnFloorCollider : MonoBehaviour {
 		if (people == null) {
 			people = gameObject.GetComponentInParent<People> ();
 		}
-		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor") {
+		if (coll.gameObject.tag == "HardFloor") {
+			people.addFloor(coll.gameObject);
+		} else if (coll.gameObject.tag == "Floor" && !coll.gameObject.GetComponent<Floor>().fallTrough()
+		           && !coll.gameObject.GetComponent<Floor>().containPeople(people.gameObject)){
 			people.addFloor(coll.gameObject);
 		} else if ((coll.gameObject.tag == "ChaserDugFloor" && gameObject.GetComponentInParent<Chaser>() != null)) {
 			Chaser chaser = gameObject.GetComponentInParent<Chaser>();
 			chaser.dropToPit();
 		} else if (coll.gameObject.name == "DropAllGoldFloorCollider" && people.tag == "Chaser") {
 			(people as Chaser).dropAllGold();
-		}
-		else if (coll.gameObject.name == "ChaserTopCollider" 
+		} else if (coll.gameObject.name == "ChaserTopCollider" 
 		           && !coll.gameObject.GetComponentInParent<Chaser>().inPit) {
 			people.addFloor(coll.gameObject);
 		}

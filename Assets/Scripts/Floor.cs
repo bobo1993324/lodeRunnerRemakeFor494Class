@@ -7,6 +7,9 @@ public class Floor : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 	}
 	public int digState() {
+		if (animator == null) {
+			animator = GetComponent<Animator> ();
+		}
 		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
 			return 0;
 		} else if (animator.GetCurrentAnimatorStateInfo(0).IsName("floorAnimation")) {

@@ -24,18 +24,7 @@ public abstract class People : MonoBehaviour {
 		map = Camera.main.GetComponent<GenerateMap> ();
 	}
 	protected bool onFloor() {
-		if (floors.Count > 1) {
-			return true;
-		}
-		if (floors.Count == 1 && floors[0].GetComponent<Floor>() != null 
-		    && !floors[0].GetComponent<Floor>().fallTrough()
-		    && !floors[0].GetComponent<Floor>().containPeople(gameObject)) {
-			return true;
-		}
-		if (floors.Count == 1 && floors[0].name == "ChaserTopCollider") {
-			return true;
-		}
-		return false;
+		return floors.Count > 0;
 	}
 	bool hasWallOnRight() {
 		return wallOnRight.Count > 0;
