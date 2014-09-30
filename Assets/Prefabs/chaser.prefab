@@ -171,6 +171,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400018}
   - 61: {fileID: 6100018}
+  - 114: {fileID: 11400018}
   m_Layer: 0
   m_Name: ChaserTopCollider
   m_TagString: Untagged
@@ -185,7 +186,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.9766979, y: 6.47121525, z: -1}
+  m_LocalPosition: {x: 30.4230537, y: 15.7160797, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400006}
@@ -436,7 +437,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: .800000012, y: 1.20000005}
+  m_Size: {x: .800000012, y: .899999976}
   m_Center: {x: 0, y: 0}
 --- !u!61 &6100002
 BoxCollider2D:
@@ -534,7 +535,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 100018}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Size: {x: .800000012, y: .200000003}
   m_Center: {x: 0, y: .400000006}
 --- !u!114 &11400000
@@ -650,6 +651,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0791daa429b26144bbd33e8bd2ba646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f57fabe8b3eef408c81d429263a082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &21200000

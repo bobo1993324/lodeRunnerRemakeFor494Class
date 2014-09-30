@@ -15,6 +15,8 @@ public abstract class People : MonoBehaviour {
 	public List<GameObject> floors = new List<GameObject> ();
 	public List<GameObject> wallOnLeft = new List<GameObject> ();
 	public List<GameObject> wallOnRight = new List<GameObject> ();
+	public List<GameObject> topWalls = new List<GameObject>();
+
 	protected GenerateMap map;
 	protected bool updateDisabled = false;
 	protected bool isFalling = false;
@@ -102,7 +104,7 @@ public abstract class People : MonoBehaviour {
 				previousPosition.y += verticalMoveDistance;
 			}
 			transform.position = previousPosition;
-		} else if (verticalMoveDistance > 0 && onLadderCenterCount > 0) {
+		} else if (verticalMoveDistance > 0 && onLadderCenterCount > 0 && topWalls.Count == 0) {
 			Vector3 previousPosition = transform.position;
 			previousPosition.x += (Mathf.Round(previousPosition.x) -previousPosition.x ) / 3;
 			previousPosition.y += verticalMoveDistance;
