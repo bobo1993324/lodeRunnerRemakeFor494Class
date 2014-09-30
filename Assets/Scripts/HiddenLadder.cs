@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class HiddenLadder : MonoBehaviour {
-
+	public bool shown = false;
 	// Use this for initialization
 	void Start () {
 		gameObject.renderer.enabled = false;
@@ -15,6 +15,7 @@ public class HiddenLadder : MonoBehaviour {
 	}
 
 	public void show() {
+		shown = true;
 		gameObject.renderer.enabled = true;
 		gameObject.renderer.GetComponent<BoxCollider2D> ().enabled = true;
 	}

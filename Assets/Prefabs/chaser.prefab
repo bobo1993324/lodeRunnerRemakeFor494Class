@@ -556,9 +556,11 @@ MonoBehaviour:
   onLadderDownCount: 0
   onLadderCount: 0
   onStickCount: 0
+  interactWithHiddenLadder: 0
   floors: []
   wallOnLeft: []
   wallOnRight: []
+  topWalls: []
   goldPrefab: {fileID: 100000, guid: 7e9c8fd5b69da10429a82a3553c68ab2, type: 2}
   dropGoldRate: .200000003
   pitDownTime: 4

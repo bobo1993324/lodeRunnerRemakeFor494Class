@@ -511,13 +511,15 @@ MonoBehaviour:
   runSpeed: 4
   climbSpeed: 4
   fallspeed: 4
-  wallOnRightCount: 0
-  wallOnLeftCount: 0
   onLadderCenterCount: 0
   onLadderDownCount: 0
   onLadderCount: 0
   onStickCount: 0
+  interactWithHiddenLadder: 1
   floors: []
+  wallOnLeft: []
+  wallOnRight: []
+  topWalls: []
   dieSound: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:

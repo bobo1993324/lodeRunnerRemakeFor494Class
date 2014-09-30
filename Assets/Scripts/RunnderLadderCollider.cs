@@ -9,6 +9,8 @@ public class RunnderLadderCollider : MonoBehaviour {
 		}
 		if (coll.gameObject.name == "LadderWhole") {
 			people.onLadderCount ++;
+		} if (coll.gameObject.name == "LadderWholeHidden" && coll.gameObject.GetComponentInParent<HiddenLadder> ().shown) {
+			people.onLadderCount ++;	
 		} else if (coll.gameObject.tag == "Chaser" && people.tag == "Player"
 		           && !coll.gameObject.GetComponent<Chaser>().inPit) {
 			people.die();
@@ -18,6 +20,8 @@ public class RunnderLadderCollider : MonoBehaviour {
 	void OnTriggerExit2D(Collider2D coll) {
 		if (coll.gameObject.name == "LadderWhole") {
 			people.onLadderCount --;
+		} if (coll.gameObject.name == "LadderWholeHidden" && coll.gameObject.GetComponentInParent<HiddenLadder> ().shown) {
+			people.onLadderCount --;	
 		}
 	}
 }
