@@ -11,7 +11,6 @@ public class RunnerRightWallCollider : MonoBehaviour {
 		     && coll.gameObject.GetComponent<Floor>().digState() == 0) 
 		    || coll.gameObject.tag == "HardFloor") {
 				people.wallOnRightCount ++;
-			}
 		}
 	}
 	
