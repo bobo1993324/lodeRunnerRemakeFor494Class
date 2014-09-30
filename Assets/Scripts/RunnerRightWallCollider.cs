@@ -7,16 +7,18 @@ public class RunnerRightWallCollider : MonoBehaviour {
 		people = gameObject.GetComponentInParent<People> ();
 	}
 	void OnTriggerEnter2D(Collider2D coll) {
-		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor") {
-			if (people != null) {
+		if ((coll.gameObject.tag == "Floor" 
+		     && coll.gameObject.GetComponent<Floor>().digState() == 0) 
+		    || coll.gameObject.tag == "HardFloor") {
 				people.wallOnRightCount ++;
 			}
 		}
 	}
 	
 	void OnTriggerExit2D(Collider2D coll) {
-		if (coll.gameObject.tag == "Floor" || coll.gameObject.tag == "HardFloor") {
-			if (people != null)
+		if ((coll.gameObject.tag == "Floor" 
+		     && coll.gameObject.GetComponent<Floor>().digState() == 0) 
+		    || coll.gameObject.tag == "HardFloor") {
 				people.wallOnRightCount --;
 		}
 	}

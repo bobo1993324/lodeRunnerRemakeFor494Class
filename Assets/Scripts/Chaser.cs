@@ -24,7 +24,7 @@ public class Chaser : People {
 	IEnumerator dropGoldRandomly() {
 		while (true) {
 			yield return new WaitForSeconds(1);
-			if (rand.NextDouble() < dropGoldRate && goldCount > 0) {
+			if (rand.NextDouble() < dropGoldRate && goldCount > 0 && onFloor()) {
 				Vector3 myPostion = transform.position;
 				int myXRounded = Mathf.RoundToInt (myPostion.x);
 				int myYRounded = Mathf.RoundToInt (myPostion.y);

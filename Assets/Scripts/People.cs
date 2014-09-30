@@ -21,7 +21,7 @@ public abstract class People : MonoBehaviour {
 	protected void Start() {
 		map = Camera.main.GetComponent<GenerateMap> ();
 	}
-	bool onFloor() {
+	protected bool onFloor() {
 		if (floors.Count > 1) {
 			return true;
 		}
@@ -59,7 +59,10 @@ public abstract class People : MonoBehaviour {
 		if (onStick() || onFloor()) {
 			adjustVerticalPosition();
 		}
-		if (hasWallOnLeft () || hasWallOnRight ()) {
+		if (hasWallOnLeft () && transform.position.x < Mathf.Round(transform.position.x)) {
+			adjustHorizontalPosition();
+		}
+		if (hasWallOnRight () && transform.position.x > Mathf.Round(transform.position.x)) {
 			adjustHorizontalPosition();
 		}
 
