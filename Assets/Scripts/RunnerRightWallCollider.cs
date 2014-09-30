@@ -10,15 +10,15 @@ public class RunnerRightWallCollider : MonoBehaviour {
 		if ((coll.gameObject.tag == "Floor" 
 		     && coll.gameObject.GetComponent<Floor>().digState() == 0) 
 		    || coll.gameObject.tag == "HardFloor") {
-			people.wallOnRightCount ++;
+			people.wallOnRight.Add(coll.gameObject);
+		}
+		if (people.tag == "Chaser" && coll.gameObject.tag == "Chaser"
+		    && coll.gameObject.GetComponentInChildren<RunnerRightWallCollider>() != this) {
+			people.wallOnRight.Add(coll.gameObject);
 		}
 	}
 	
 	void OnTriggerExit2D(Collider2D coll) {
-		if ((coll.gameObject.tag == "Floor" 
-		     && coll.gameObject.GetComponent<Floor>().digState() == 0) 
-		    || coll.gameObject.tag == "HardFloor") {
-			people.wallOnRightCount --;
-		}
+		people.wallOnRight.Remove(coll.gameObject);
 	}
 }

@@ -6,15 +6,15 @@ public abstract class People : MonoBehaviour {
 	public float runSpeed = 4;
 	public float climbSpeed = 4;
 	public float fallspeed = 4;
-	
-	public int wallOnRightCount = 0;
-	public int wallOnLeftCount = 0;
+
 	public int onLadderCenterCount = 0;
 	public int onLadderDownCount = 0;
 	public int onLadderCount = 0;
 	public int onStickCount = 0;
 
 	public List<GameObject> floors = new List<GameObject> ();
+	public List<GameObject> wallOnLeft = new List<GameObject> ();
+	public List<GameObject> wallOnRight = new List<GameObject> ();
 	protected GenerateMap map;
 	protected bool updateDisabled = false;
 	protected bool isFalling = false;
@@ -30,13 +30,16 @@ public abstract class People : MonoBehaviour {
 		    && !floors[0].GetComponent<Floor>().containPeople(gameObject)) {
 			return true;
 		}
+		if (floors.Count == 1 && floors[0].name == "ChaserTopCollider") {
+			return true;
+		}
 		return false;
 	}
 	bool hasWallOnRight() {
-		return wallOnRightCount > 0;
+		return wallOnRight.Count > 0;
 	}
 	bool hasWallOnLeft() {
-		return wallOnLeftCount > 0;
+		return wallOnLeft.Count > 0;
 	}
 	bool onStick() {
 		return onStickCount > 0;
@@ -45,7 +48,7 @@ public abstract class People : MonoBehaviour {
 		return onLadderCenterCount > 0;
 	}
 	protected bool canGoDown() {
-		return (onLadderDownCount > 0 || onStick()) && !onFloor () ;
+		return (onLadderDownCount + onLadderCenterCount> 0 || onStick()) && !onFloor () ;
 	}
 	
 	// Update is called once per frame
@@ -79,6 +82,7 @@ public abstract class People : MonoBehaviour {
 			isFalling = false;
 		}
 		Vector2 movement = decideMovement ();
+		Debug.Log("movement" + movement.y);
 		float horizontalMoveDistance = movement.x * runSpeed * Time.deltaTime;
 		bool stopByWall = (hasWallOnLeft() && horizontalMoveDistance < 0) 
 			|| (hasWallOnRight() && horizontalMoveDistance > 0); 
@@ -89,12 +93,16 @@ public abstract class People : MonoBehaviour {
 		}
 		
 		float verticalMoveDistance = movement.y * climbSpeed * Time.deltaTime;
-		if (verticalMoveDistance < 0 && onStick() && !onFloor()) {
+		if (verticalMoveDistance < 0 && canGoDown()) {
 			Vector3 previousPosition = transform.position;
-			previousPosition.y -= 0.3f;
+			if (onStick()) {
+				previousPosition.y -= 0.3f;
+			} else {
+				previousPosition.x += (Mathf.Round(previousPosition.x) -previousPosition.x ) / 3;
+				previousPosition.y += verticalMoveDistance;
+			}
 			transform.position = previousPosition;
-		} else if ((verticalMoveDistance < 0 && (onLadderDownCount > 0 || !onFloor ()))
-		    || (verticalMoveDistance > 0 && onLadderCenterCount > 0)) {
+		} else if (verticalMoveDistance > 0 && onLadderCenterCount > 0) {
 			Vector3 previousPosition = transform.position;
 			previousPosition.x += (Mathf.Round(previousPosition.x) -previousPosition.x ) / 3;
 			previousPosition.y += verticalMoveDistance;
