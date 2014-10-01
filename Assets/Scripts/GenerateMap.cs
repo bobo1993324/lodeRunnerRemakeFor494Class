@@ -86,7 +86,7 @@ public class GenerateMap : MonoBehaviour {
 		}
 		if(mapName == "custom") {
 			xmlDoc.LoadXml (new MapCustom().xml);
-			completeLevelObject.transform.position = new Vector3(37, 30, 0);
+			completeLevelObject.transform.position = new Vector3(37, 25, 0);
 		}
         //xmlDoc.Load ("./Assets/Maps/Level2.tmx");
 		XmlNodeList tilesetList = xmlDoc.GetElementsByTagName ("tileset");
