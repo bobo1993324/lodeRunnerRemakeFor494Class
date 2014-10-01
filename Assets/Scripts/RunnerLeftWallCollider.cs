@@ -7,14 +7,16 @@ public class RunnerLeftWallCollider : MonoBehaviour {
 		people = gameObject.GetComponentInParent<People> ();
 	}
 	void OnTriggerEnter2D(Collider2D coll) {
-		if ((coll.gameObject.tag == "Floor" 
-		     && coll.gameObject.GetComponent<Floor>().digState() == 0) 
-		    || coll.gameObject.tag == "HardFloor") {
-			people.wallOnLeft.Add(coll.gameObject);
-		}
-		if (people.tag == "Chaser" && coll.gameObject.tag == "Chaser" 
-		    && coll.gameObject.GetComponentInChildren<RunnerLeftWallCollider>() != this) {
-			people.wallOnLeft.Add(coll.gameObject);
+		if (people != null) {
+			if ((coll.gameObject.tag == "Floor" 
+			     && coll.gameObject.GetComponent<Floor>().digState() == 0) 
+			    || coll.gameObject.tag == "HardFloor") {
+				people.wallOnLeft.Add(coll.gameObject);
+			}
+			if (people.tag == "Chaser" && coll.gameObject.tag == "Chaser" 
+			    && coll.gameObject.GetComponentInChildren<RunnerLeftWallCollider>() != this) {
+				people.wallOnLeft.Add(coll.gameObject);
+			}
 		}
 	}
     

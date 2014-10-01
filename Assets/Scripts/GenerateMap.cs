@@ -82,7 +82,7 @@ public class GenerateMap : MonoBehaviour {
 		}
 		if(mapName == "1") {
 			xmlDoc.LoadXml (new MapLevel1().xml);
-			completeLevelObject.transform.position = new Vector3(25, 16, 0);
+			completeLevelObject.transform.position = new Vector3(17, 16, 0);
 		}
 		if(mapName == "custom") {
 			xmlDoc.LoadXml (new MapCustom().xml);

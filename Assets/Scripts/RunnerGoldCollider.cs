@@ -14,7 +14,7 @@ public class RunnerGoldCollider : MonoBehaviour {
 		if (people.tag == "Player" && coll.gameObject.tag == "Gold") {
 			goldCollector.collectGold();
 			Destroy(coll.gameObject);
-		} else if (people.tag == "Chaser" && coll.gameObject.tag == "Gold") {
+		} else if (people.tag == "Chaser" && coll.gameObject.tag == "Gold" && !coll.gameObject.GetComponent<Gold>().disableForChaser) {
 			(people as Chaser).collectGold();
 			Destroy(coll.gameObject);
 		}

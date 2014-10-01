@@ -21,6 +21,7 @@ public class RunnerOnFloorCollider : MonoBehaviour {
 			(people as Chaser).dropAllGold();
 		} else if (coll.gameObject.name == "ChaserTopCollider" 
 		           && !coll.gameObject.GetComponentInParent<Chaser>().inPit) {
+			coll.gameObject.GetComponentInParent<People>().registerDependantTrigger(people);
 			people.addFloor(coll.gameObject);
 		}
 
@@ -31,6 +32,9 @@ public class RunnerOnFloorCollider : MonoBehaviour {
 		    || coll.gameObject.tag == "HardFloor"
 		    || coll.gameObject.name == "ChaserTopCollider") {
 			people.removeFloor(coll.gameObject);
+		}
+		if (coll.gameObject.name == "ChaserTopCollider") {
+			coll.gameObject.GetComponentInParent<People>().unregisterDependantTrigger(people);
 		}
 	}
 }

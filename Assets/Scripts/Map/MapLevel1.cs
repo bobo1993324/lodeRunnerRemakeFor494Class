@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class MapLevel1 {
-	public string xml = @"<?xml version=""1.0"" encoding=""UTF-8""?> 
-<map version=""1.0"" orientation=""orthogonal"" width=""27"" height=""16"" tilewidth=""32"" tileheight=""32"">
+	public string xml = @"<?xml version=""1.0"" encoding=""UTF-8""?>
+<map version=""1.0"" orientation=""orthogonal"" renderorder=""right-down"" width=""27"" height=""16"" tilewidth=""32"" tileheight=""32"">
  <tileset firstgid=""1"" name=""floor"" tilewidth=""32"" tileheight=""32"">
   <image source=""../Sprites/floor.jpg"" width=""33"" height=""32""/>
  </tileset>
@@ -28,7 +28,7 @@ public class MapLevel1 {
  <tileset firstgid=""8"" name=""chaser"" tilewidth=""32"" tileheight=""32"">
   <image source=""../Sprites/chaser.jpg"" width=""32"" height=""32""/>
  </tileset>
- <layer name=""鍧楀眰 1"" width=""27"" height=""16"">
+ <layer name=""块层 1"" width=""27"" height=""16"">
   <data>
    <tile gid=""4""/>
    <tile gid=""0""/>
@@ -47,60 +47,61 @@ public class MapLevel1 {
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
+   <tile gid=""7""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
+   <tile gid=""4""/>
+   <tile gid=""4""/>
+   <tile gid=""1""/>
+   <tile gid=""1""/>
+   <tile gid=""1""/>
+   <tile gid=""1""/>
+   <tile gid=""1""/>
+   <tile gid=""1""/>
+   <tile gid=""2""/>
+   <tile gid=""1""/>
+   <tile gid=""1""/>
+   <tile gid=""1""/>
+   <tile gid=""1""/>
+   <tile gid=""1""/>
+   <tile gid=""1""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""7""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
    <tile gid=""4""/>
    <tile gid=""4""/>
-   <tile gid=""1""/>
-   <tile gid=""1""/>
-   <tile gid=""1""/>
-   <tile gid=""1""/>
-   <tile gid=""1""/>
-   <tile gid=""1""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
    <tile gid=""2""/>
-   <tile gid=""1""/>
-   <tile gid=""1""/>
-   <tile gid=""1""/>
-   <tile gid=""1""/>
-   <tile gid=""1""/>
-   <tile gid=""1""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
+   <tile gid=""5""/>
+   <tile gid=""5""/>
+   <tile gid=""5""/>
+   <tile gid=""5""/>
+   <tile gid=""5""/>
+   <tile gid=""5""/>
+   <tile gid=""5""/>
+   <tile gid=""5""/>
+   <tile gid=""5""/>
    <tile gid=""7""/>
-   <tile gid=""4""/>
-   <tile gid=""4""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
-   <tile gid=""2""/>
-   <tile gid=""5""/>
-   <tile gid=""5""/>
-   <tile gid=""5""/>
-   <tile gid=""5""/>
-   <tile gid=""5""/>
-   <tile gid=""5""/>
-   <tile gid=""5""/>
-   <tile gid=""5""/>
-   <tile gid=""5""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
@@ -109,7 +110,6 @@ public class MapLevel1 {
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
-   <tile gid=""7""/>
    <tile gid=""4""/>
    <tile gid=""4""/>
    <tile gid=""0""/>
@@ -124,7 +124,7 @@ public class MapLevel1 {
    <tile gid=""0""/>
    <tile gid=""1""/>
    <tile gid=""1""/>
-   <tile gid=""0""/>
+   <tile gid=""2""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
@@ -151,7 +151,7 @@ public class MapLevel1 {
    <tile gid=""0""/>
    <tile gid=""1""/>
    <tile gid=""1""/>
-   <tile gid=""0""/>
+   <tile gid=""2""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
@@ -178,7 +178,7 @@ public class MapLevel1 {
    <tile gid=""0""/>
    <tile gid=""1""/>
    <tile gid=""1""/>
-   <tile gid=""0""/>
+   <tile gid=""2""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
@@ -387,14 +387,14 @@ public class MapLevel1 {
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""2""/>
-   <tile gid=""0""/>
-   <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""6""/>
+   <tile gid=""0""/>
+   <tile gid=""0""/>
    <tile gid=""0""/>
    <tile gid=""3""/>
    <tile gid=""0""/>

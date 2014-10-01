@@ -66,9 +66,9 @@ public class Chaser : People {
 		MoveDirection md = map.getChaseDirection (playerXRounded, playerYRounded, myXRounded, myYRounded);
 		//Debug.Log ("decideMovement " + myXRounded + " " + myYRounded + " " + md); 
 		if (md == MoveDirection.GO_LEFT || md == MoveDirection.GO_RIGHT) {
-			if (myPostion.y - myYRounded > 0.05f && onLadderCount > 0) {
+			if (myPostion.y - myYRounded > 0.1f && onLadderCount > 0) {
 				return goDown();
-			} else if (myPostion.y - myYRounded < -0.05f && onLadderCount > 0) {
+			} else if (myPostion.y - myYRounded < -0.1f && onLadderCount > 0) {
 				return goUp();
 			} else {
 				if (md == MoveDirection.GO_LEFT)
@@ -91,14 +91,14 @@ public class Chaser : People {
 		}
 
 		//use lame algorithm if cannot precompute path
-		if (Mathf.Abs (playerPosition.y - myPostion.y) < 0.04) {
+		if (Mathf.Abs (playerPosition.y - myPostion.y) < 0.1) {
 			//on same level
 			if (myXRounded > playerXRounded) {
 				return goLeft();
 			} else {
 				return goRight();
 			}
-		} else if (playerPosition.y - myPostion.y > 0.04) {
+		} else if (playerPosition.y - myPostion.y > 0.1) {
 			//find a ladder to climb up
 			if (onLadderCenter()) {
 				return goUp();
@@ -135,6 +135,7 @@ public class Chaser : People {
 	}
 	public override void die ()
 	{
+		notifyDistroyed();
 		Destroy (gameObject);
 		Camera.main.GetComponent<GenerateMap> ().respawnEnermy ();
 		//Respawn

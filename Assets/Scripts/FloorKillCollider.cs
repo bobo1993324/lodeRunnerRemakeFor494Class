@@ -22,7 +22,11 @@ public class FloorKillCollider : MonoBehaviour {
 			Debug.Log(i + " " + goInKillRange[i].GetInstanceID());
 		}
 		if (goInKillRange.Count > 0) {
-			goInKillRange[0].GetComponent<People>().die();
+			try{
+			People p = goInKillRange[0].GetComponent<People>();
+			if (p!= null)
+				p.die();
+			}catch(MissingReferenceException e){}
 		}
 		goInKillRange.Clear ();
 	}

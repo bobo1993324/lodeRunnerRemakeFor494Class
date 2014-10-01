@@ -16,10 +16,17 @@ public abstract class People : MonoBehaviour {
 	public List<GameObject> wallOnLeft = new List<GameObject> ();
 	public List<GameObject> wallOnRight = new List<GameObject> ();
 	public List<GameObject> topWalls = new List<GameObject>();
+	public List<People> distoyableRegistedList = new List<People>();
 
 	protected GenerateMap map;
 	protected bool updateDisabled = false;
 	protected bool isFalling = false;
+	public void registerDependantTrigger(People go) {
+		distoyableRegistedList.Add (go);
+	}
+	public void unregisterDependantTrigger(People go) {
+		distoyableRegistedList.Remove (go);
+	}
 	protected void Start() {
 		map = Camera.main.GetComponent<GenerateMap> ();
 	}
@@ -73,7 +80,7 @@ public abstract class People : MonoBehaviour {
 			isFalling = false;
 		}
 		Vector2 movement = decideMovement ();
-		Debug.Log("movement" + movement.y);
+		Debug.Log("movement" + movement.y + " " + movement.x);
 		float horizontalMoveDistance = movement.x * runSpeed * Time.deltaTime;
 		bool stopByWall = (hasWallOnLeft() && horizontalMoveDistance < 0) 
 			|| (hasWallOnRight() && horizontalMoveDistance > 0); 
@@ -116,6 +123,15 @@ public abstract class People : MonoBehaviour {
 		floors.Add (go);
 	}
 	public void removeFloor(GameObject go) {
+		floors.Remove (go);
+	}
+	protected void notifyDistroyed() {
+		for (int i = 0; i < this.distoyableRegistedList.Count; i++) { 
+			distoyableRegistedList[i].GetComponentInParent <People>().floorChaserDistroyed(this.GetComponentInChildren<ChaserTopCollider>().gameObject);
+		}
+	}
+	public void floorChaserDistroyed(GameObject go) {
+		Debug.Log ("chaser at bottom distroyed, remove " + go.GetInstanceID ());
 		floors.Remove (go);
 	}
 	public abstract Vector2 decideMovement();
