@@ -151,7 +151,9 @@ public class GenerateMap : MonoBehaviour {
 						GameObject leftGo = gameObjectMatrix[i - 1, j];
 						GameObject lowerGo = gameObjectMatrix[i, j - 1];
 						if (lowerGo != null 
-						    && (lowerGo.tag == "Ladder" || lowerGo.tag.Contains("Floor"))
+						    && ((lowerGo.tag == "Ladder" 
+						     		&& (currentGo == null || currentGo.tag != "Ladder")) 
+						    	|| lowerGo.tag.Contains("Floor"))
 						    && (leftGo == null || !leftGo.tag.Contains("Floor"))) {
 							cap.goLeft = true;
 						}
@@ -225,14 +227,6 @@ public class GenerateMap : MonoBehaviour {
 							toVisitQueue.Enqueue(xyKey(currentx + 1, currenty));
 						}
 					}
-					if (currenty > 0 && !visited.Contains(xyKey(currentx, currenty - 1))) {
-						MoveCapability mc = moveCapabilityMatrix[currentx, currenty - 1];
-						int key = chaseDirectionKey(playerx, playery, currentx, currenty - 1);
-						if (mc != null && mc.goUp && !chaseDirection.ContainsKey(key)) {
-							chaseDirection.Add(key, MoveDirection.GO_UP);
-							toVisitQueue.Enqueue(xyKey(currentx, currenty - 1));
-						}
-					}
 					if (currenty < height - 1 && !visited.Contains(xyKey(currentx, currenty + 1))) {
 						MoveCapability mc = moveCapabilityMatrix[currentx, currenty + 1];
 						int key = chaseDirectionKey(playerx, playery, currentx, currenty + 1);
@@ -241,39 +235,47 @@ public class GenerateMap : MonoBehaviour {
 							toVisitQueue.Enqueue(xyKey(currentx, currenty + 1));
 						}
 					}
+					if (currenty > 0 && !visited.Contains(xyKey(currentx, currenty - 1))) {
+						MoveCapability mc = moveCapabilityMatrix[currentx, currenty - 1];
+						int key = chaseDirectionKey(playerx, playery, currentx, currenty - 1);
+						if (mc != null && mc.goUp && !chaseDirection.ContainsKey(key)) {
+							chaseDirection.Add(key, MoveDirection.GO_UP);
+							toVisitQueue.Enqueue(xyKey(currentx, currenty - 1));
+						}
+					}
 				}
 			}
 		}
 		// visualize
 
-//		int playerX = 6;
-//		int playerY = 3;
-//		for (int i = 0; i < width; i++) {
-//			for (int j = 0; j < height; j++) {
-//				int key = chaseDirectionKey(playerX, playerY, i, j);
-//				if (!chaseDirection.ContainsKey(key)) {
-//					continue;
-//				}
-//				MoveDirection m = (MoveDirection)chaseDirection[key];
-//				if (m == MoveDirection.GO_UP) {
-//					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
-//						.transform.Rotate(0, 0, 90f);
-//				}
-//				if (m == MoveDirection.GO_DOWN) {
-//					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
-//						.transform.Rotate(0, 0, -90f);
-//				}
-//				if (m == MoveDirection.GO_RIGHT) {
-//					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
-//						.transform.Rotate(0, 0, 0);
-//				}
-//				
-//				if (m == MoveDirection.GO_LEFT) {
-//					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
-//						.transform.Rotate(0, 0, 180);
-//				}
-//			}
-//		}
+		int playerX = 2;
+		int playerY = 8;
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				int key = chaseDirectionKey(playerX, playerY, i, j);
+				if (!chaseDirection.ContainsKey(key)) {
+					continue;
+				}
+				MoveDirection m = (MoveDirection)chaseDirection[key];
+				if (m == MoveDirection.GO_UP) {
+					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
+						.transform.Rotate(0, 0, 90f);
+				}
+				if (m == MoveDirection.GO_DOWN) {
+					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
+						.transform.Rotate(0, 0, -90f);
+				}
+				if (m == MoveDirection.GO_RIGHT) {
+					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
+						.transform.Rotate(0, 0, 0);
+				}
+				
+				if (m == MoveDirection.GO_LEFT) {
+					(Instantiate(arrowPrefab, new Vector3(i, j), Quaternion.identity) as GameObject)
+						.transform.Rotate(0, 0, 180);
+				}
+			}
+		}
 
 	}
 	
